@@ -2,7 +2,7 @@ import { Injector, NgModule } from '@angular/core';
 import { createCustomElement } from '@angular/elements';
 import { BrowserModule } from '@angular/platform-browser';
 
-import { TestComponent } from './test/test.component';
+import { TestComponent } from './components/test/test.component';
 
 /** All custom elements should be included here */
 const CUSTOM_ELEMENTS = [TestComponent];
