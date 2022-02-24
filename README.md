@@ -60,6 +60,10 @@ yarn build:components
 
 This will create a single [components/index.js](components/index.js) file which can be imported and then used to allow custom-elements called directly
 
+### Serve Examples
+
+The examples folder contains demonstrations of custom-elements being used within basic html pages. Files can be opened in any web-browser, or served via `yarn start:examples`
+
 ## Known Issues
 
 - All components are generated as a single export and so do not support tree-shaking/individual load. This is due to the fact by default all components need to package the main angular build and polyfills, leading to significant duplication bloat across multiple components. There exists some 3rd party tooling such as [ngx-build-plus](https://github.com/manfredsteyer/ngx-build-plus#ngx-build-plus-and-angular-elements) to work around this, however compatibility not currently supported for Angular 13 (see issue [314](https://github.com/manfredsteyer/ngx-build-plus/issues/314)).

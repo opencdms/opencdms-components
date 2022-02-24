@@ -2,6 +2,7 @@ const path = require("path");
 const fs = require("fs-extra");
 const concat = require("concat");
 
+/** Combine all output angular JS into single index.js file for easier consumption */
 (async function concatBundles() {
   const buildDir = path.resolve(__dirname, "../dist", "webcomponents");
   const outDir = path.resolve(__dirname, "../components");
