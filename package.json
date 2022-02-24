@@ -1,10 +1,12 @@
 {
   "name": "webcomponents",
-  "version": "0.0.0",
+  "version": "1.0.0",
+  "license": "SEE LICENSE in LICENSE",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
+    "build:components": "ng build --configuration production --output-hashing none && node scripts/concat-bundles.js",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },
@@ -14,6 +16,7 @@
     "@angular/common": "~13.2.0",
     "@angular/compiler": "~13.2.0",
     "@angular/core": "~13.2.0",
+    "@angular/elements": "^13.2.4",
     "@angular/forms": "~13.2.0",
     "@angular/platform-browser": "~13.2.0",
     "@angular/platform-browser-dynamic": "~13.2.0",
@@ -28,6 +31,8 @@
     "@angular/compiler-cli": "~13.2.0",
     "@types/jasmine": "~3.10.0",
     "@types/node": "^12.11.1",
+    "concat": "^1.0.3",
+    "fs-extra": "^10.0.1",
     "jasmine-core": "~4.0.0",
     "karma": "~6.3.0",
     "karma-chrome-launcher": "~3.1.0",
