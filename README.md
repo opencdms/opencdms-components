@@ -44,10 +44,10 @@ Register as webcomponent
 ```
 import { MyExampleComponent } from './components/my-example/my-example.component';
 
-const CUSTOM_ELEMENTS = [MyExampleComponent, ... ];
+export const CUSTOM_ELEMENTS = [MyExampleComponent, ... ];
 ```
 
-_src\app\register-webcomponents.ts_
+_src\app\components\components.module.ts_
 
 This will handle the process of registering as a custom webcomponent using the name specified.
 The component can now be included in the src `index.html` or any other html file as `<opencdms-my-example></opencdms-my-example>`
