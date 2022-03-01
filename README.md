@@ -26,7 +26,7 @@ Changes within the `src` folder will be live-reloaded
 Use angular cli to scaffold out a new component
 
 ```
-yarn ng g component components/my-example
+yarn ng g component components/my-example --no-module
 ```
 
 Provide a static `componentName` property - this will be used when importing as a webcomponent
@@ -39,13 +39,15 @@ export class MyExampleComponent implements OnInit {
 
 _my-example.component.ts_
 
-Register in app module
+Register as webcomponent
 
 ```
+import { MyExampleComponent } from './components/my-example/my-example.component';
+
 const CUSTOM_ELEMENTS = [MyExampleComponent, ... ];
 ```
 
-_app-module.ts_
+_src\app\register-webcomponents.ts_
 
 This will handle the process of registering as a custom webcomponent using the name specified.
 The component can now be included in the src `index.html` or any other html file as `<opencdms-my-example></opencdms-my-example>`
