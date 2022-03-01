@@ -1,7 +1,8 @@
 import { DoBootstrap, Injector, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { ComponentsModule } from './components/components.module';
 
-import { CUSTOM_ELEMENTS, registerWebComponents } from './register-webcomponents';
+import { registerWebComponents } from './register-webcomponents';
 
 /**
  * The webcompoments app module replaces the original app module when building for the webcomponent configuration.
@@ -9,8 +10,8 @@ import { CUSTOM_ELEMENTS, registerWebComponents } from './register-webcomponents
  * and omitting the default app-component (only want to export webcompoments, not app)
  */
 @NgModule({
-  declarations: [...CUSTOM_ELEMENTS],
-  imports: [BrowserModule],
+  declarations: [],
+  imports: [BrowserModule, ComponentsModule],
   providers: [],
   bootstrap: [], // skip typical app-root bootratp
 })
