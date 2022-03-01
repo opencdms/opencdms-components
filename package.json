@@ -7,7 +7,7 @@
     "start": "ng serve",
     "start:examples": "npx browser-sync start --server --watch --startPath examples --files 'components/ examples/'",
     "build": "ng build",
-    "build:components": "ng build --configuration production --output-hashing none && node scripts/concat-bundles.js",
+    "build:components": "ng build --configuration production,webcomponents && node scripts/concat-bundles.js",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "api:generate:types": "npx openapi-typescript https://api.opencdms.org/climsoft/openapi.json --output src/models/opencdms-api.ts"
