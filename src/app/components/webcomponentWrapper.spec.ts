@@ -36,23 +36,31 @@ describe('WebcomponentWrapper', () => {
     const errors: any[] = [];
     it('renders all components as webcomponents', async () => {
       for (const element of CUSTOM_ELEMENTS) {
-        const { componentName } = element;
-        const tagname = `${CUSTOM_ELEMENTS_PREFIX}-${componentName}`;
-        const webcomponentEl: Element = fixture.debugElement.nativeElement.querySelector(tagname);
-        if (!webcomponentEl) errors.push({ tagname, err: 'Fail to render' });
-        const shadowRoot = webcomponentEl?.shadowRoot;
-        if (!webcomponentEl) errors.push({ tagname, err: 'Fail to use shadowroot' });
-        const nodes = shadowRoot?.childNodes;
-        if (!nodes || nodes?.length === 0) errors.push({ tagname, err: 'Fail to render child nodes' });
+        const error = testWebcomponentErrors(element);
+        if (error) errors.push(error);
       }
       // Allow time after fail to inspect if required
       if (errors.length > 0) {
-        console.error(errors);
+        console.error('Webcomponent spec errors', errors);
         await _wait(5000);
       }
       expect(errors.length).toEqual(0);
     });
   });
+
+  function testWebcomponentErrors(element: any) {
+    const { componentName } = element;
+    if (!componentName) return { el: element.name, err: 'No componentName specified' };
+    const tagname = `${CUSTOM_ELEMENTS_PREFIX}-${componentName}`;
+    const webcomponentEl: Element = fixture.debugElement.nativeElement.querySelector(tagname);
+    if (!webcomponentEl) return { tagname, err: 'Fail to render' };
+    const shadowRoot = webcomponentEl?.shadowRoot;
+    if (!webcomponentEl) return { tagname, err: 'Fail to use shadowroot' };
+    const nodes = shadowRoot?.childNodes;
+    if (!nodes || nodes?.length === 0) return { tagname, err: 'Fail to render child nodes' };
+
+    return;
+  }
 });
 
 function _wait(ms: number) {
