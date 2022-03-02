@@ -1,6 +1,7 @@
 import { DoBootstrap, Injector, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { ComponentsModule } from './components/components.module';
+import { DialogsModule } from './dialogs/dialogs.module';
 
 import { registerWebComponents } from './register-webcomponents';
 
@@ -11,7 +12,7 @@ import { registerWebComponents } from './register-webcomponents';
  */
 @NgModule({
   declarations: [],
-  imports: [BrowserModule, ComponentsModule],
+  imports: [BrowserModule, ComponentsModule, DialogsModule],
   providers: [],
   bootstrap: [], // skip typical app-root bootratp
 })
