@@ -73,3 +73,4 @@ The examples folder contains demonstrations of custom-elements being used within
 ## Links and Resources
 
 https://fireship.io/lessons/angular-elements-quick-start-guide/
+https://coreui.io/angular/docs/4.0
