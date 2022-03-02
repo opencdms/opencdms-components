@@ -15,6 +15,7 @@
   "private": true,
   "dependencies": {
     "@angular/animations": "~13.2.0",
+    "@angular/cdk": "^13.2.4",
     "@angular/common": "~13.2.0",
     "@angular/compiler": "~13.2.0",
     "@angular/core": "~13.2.0",
@@ -25,6 +26,8 @@
     "@angular/router": "~13.2.0",
     "@coreui/angular": "^4.0.0-alpha.9",
     "@coreui/coreui": "^4.1.0",
+    "@coreui/icons": "^2.1.0",
+    "@coreui/icons-angular": "^3.0.0-alpha.4",
     "openapi-typescript-fetch": "^1.1.2",
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",
