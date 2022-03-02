@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { CUSTOM_ELEMENTS_PREFIX } from '../register-webcomponents';
-import { CUSTOM_ELEMENTS } from './components.module';
+import { CUSTOM_COMPONENTS_PREFIX } from '../register-webcomponents';
+import { CUSTOM_COMPONENTS } from './components.module';
 import { WebcomponentWrapper } from './webcomponentWrapper';
 
 const TIMEOUT = 1000 * 60 * 6;
@@ -9,7 +9,7 @@ const TIMEOUT = 1000 * 60 * 6;
  * When testing webcomponents all testing must be carried out in a single run as angular
  * appears to have issue re-registering/re-evaluating webcomponents.
  *
- * So just carry out a simple test to ensure all render with shadowroot and child nodes
+ * So just carry out a simple test to ensure all render with child nodes
  */
 describe('WebcomponentWrapper', () => {
   let component: WebcomponentWrapper;
@@ -23,9 +23,9 @@ describe('WebcomponentWrapper', () => {
     fixture = TestBed.createComponent(WebcomponentWrapper);
     component = fixture.componentInstance;
     // render all components via their webcomponent tags
-    const testHtml = CUSTOM_ELEMENTS.map((element) => {
+    const testHtml = CUSTOM_COMPONENTS.map((element) => {
       const { componentName } = element;
-      const tagname = `${CUSTOM_ELEMENTS_PREFIX}-${componentName}`;
+      const tagname = `${CUSTOM_COMPONENTS_PREFIX}-${componentName}`;
       return `<${tagname}></${tagname}>`;
     }).join('\n');
     component.html = testHtml;
@@ -35,7 +35,7 @@ describe('WebcomponentWrapper', () => {
   describe('Webcomponents', () => {
     const errors: any[] = [];
     it('renders all components as webcomponents', async () => {
-      for (const element of CUSTOM_ELEMENTS) {
+      for (const element of CUSTOM_COMPONENTS) {
         const error = testWebcomponentErrors(element);
         if (error) errors.push(error);
       }
@@ -51,12 +51,10 @@ describe('WebcomponentWrapper', () => {
   function testWebcomponentErrors(element: any) {
     const { componentName } = element;
     if (!componentName) return { el: element.name, err: 'No componentName specified' };
-    const tagname = `${CUSTOM_ELEMENTS_PREFIX}-${componentName}`;
+    const tagname = `${CUSTOM_COMPONENTS_PREFIX}-${componentName}`;
     const webcomponentEl: Element = fixture.debugElement.nativeElement.querySelector(tagname);
     if (!webcomponentEl) return { tagname, err: 'Fail to render' };
-    const shadowRoot = webcomponentEl?.shadowRoot;
-    if (!webcomponentEl) return { tagname, err: 'Fail to use shadowroot' };
-    const nodes = shadowRoot?.childNodes;
+    const nodes = webcomponentEl?.childNodes;
     if (!nodes || nodes?.length === 0) return { tagname, err: 'Fail to render child nodes' };
 
     return;
