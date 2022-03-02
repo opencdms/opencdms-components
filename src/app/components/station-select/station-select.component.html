@@ -1,4 +1,4 @@
-<table cTable style="width: 100%">
+<table cTable hover bordered style="width: 100%" class="table table-hover">
   <thead>
     <tr>
       <th scope="col">Station ID</th>
@@ -7,10 +7,14 @@
   </thead>
 
   <tbody>
-    <tr *ngFor="let station of stations">
+    <tr
+      *ngFor="let station of stations"
+      [class.table-active]="selectedStations[station.station_id]"
+      (click)="toggleStationSelected(station)"
+    >
       <th scope="row">{{ station.station_id }}</th>
       <td>{{ station.station_name }}</td>
     </tr>
   </tbody>
 </table>
-<app-loader style="min-height: 200px"></app-loader>
+<app-loader style="min-height: 200px" *ngIf="dataIsLoading"></app-loader>
