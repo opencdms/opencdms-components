@@ -1,1 +1,16 @@
-<p>home-page works!</p>
+<c-container fluid>
+  <!-- Force sidebar to not collapse via margin -->
+  <c-sidebar visible class="no-collapse">
+    <c-sidebar-brand>OpenCDMS Components</c-sidebar-brand>
+    <c-sidebar-nav [navItems]="navItems"></c-sidebar-nav>
+  </c-sidebar>
+</c-container>
+<div class="sidebar-content">
+  <h1 style="text-align: center">{{ activeElement.componentName }}</h1>
+  <code> </code>
+  <div [ngSwitch]="activeElement.componentName">
+    <app-station-select *ngSwitchCase="'station-select'"></app-station-select>
+    <app-test *ngSwitchCase="'test'"></app-test>
+    <div *ngSwitchDefault></div>
+  </div>
+</div>

@@ -1,0 +1,11 @@
+c-sidebar.no-collapse {
+  // prevent sidebar from collapse
+  margin-left: 0 !important;
+}
+
+.sidebar-content {
+  margin-left: 256px; // manually offset content to left of large sidebar
+}
+.sidebar-content h1 {
+  line-height: 64px;
+}

@@ -135,6 +135,15 @@
   dependencies:
     tslib "^2.3.0"
 
+"@angular/cdk@^13.2.4":
+  version "13.2.4"
+  resolved "https://registry.yarnpkg.com/@angular/cdk/-/cdk-13.2.4.tgz#52ca05cabd64bc17fef3c3f23b215604267f3d66"
+  integrity sha512-t8LX/xySaIyN5EpWQjCwZFVLmdW/LE7pvx+6PghYGiLNvS+Vu/INi1Bhwt+b3fJDJ1uNYVCkB64G0UYhIsAwhg==
+  dependencies:
+    tslib "^2.3.0"
+  optionalDependencies:
+    parse5 "^5.0.0"
+
 "@angular/cli@~13.2.5":
   version "13.2.5"
   resolved "https://registry.yarnpkg.com/@angular/cli/-/cli-13.2.5.tgz#7a0580720903975e2c22d82e2225d44748a6fa90"
@@ -1184,6 +1193,18 @@
   version "4.1.0"
   resolved "https://registry.yarnpkg.com/@coreui/coreui/-/coreui-4.1.0.tgz#24abbd88ead2fef0360a208ac752f2bb8e4a8f7d"
   integrity sha512-2iMKPpxXquN3ZyL44s6Urvsnk03iw+KuJk/AKz5spSgKReUr7AM3WEiaTNFNo1/ZypB67pg0966tT22BSmgkGg==
+
+"@coreui/icons-angular@^3.0.0-alpha.4":
+  version "3.0.0-alpha.4"
+  resolved "https://registry.yarnpkg.com/@coreui/icons-angular/-/icons-angular-3.0.0-alpha.4.tgz#a56442446138f4ace43ad6e3d28dcc8b595b34c1"
+  integrity sha512-sBpzC0xUYmCvnis0RMtROBD7A56OycEFiclAE2iJ24FcDDd10BOrClIfutEf5P6E0irxo3KmiPqrTRiNookq/A==
+  dependencies:
+    tslib "^2.3.0"
+
+"@coreui/icons@^2.1.0":
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/@coreui/icons/-/icons-2.1.0.tgz#b21641d3d034fdef308c87dc347c8684c408a753"
+  integrity sha512-3yY9J0088TSY403jwJeP5YERH3RLOvxdhOa4VIQsGOX4fuQZiyVUM+vwlzyCSpgAv9NwKPkCor+gc+JJaYf0TA==
 
 "@csstools/postcss-progressive-custom-properties@^1.1.0":
   version "1.2.0"
@@ -4709,6 +4730,11 @@ parse5-sax-parser@^6.0.1:
   integrity sha512-kXX+5S81lgESA0LsDuGjAlBybImAChYRMT+/uKCEXFBFOeEhS52qUCydGhU3qLRD8D9DVjaUo821WK7DM4iCeg==
   dependencies:
     parse5 "^6.0.1"
+
+parse5@^5.0.0:
+  version "5.1.1"
+  resolved "https://registry.yarnpkg.com/parse5/-/parse5-5.1.1.tgz#f68e4e5ba1852ac2cadc00f4555fff6c2abb6178"
+  integrity sha512-ugq4DFI0Ptb+WWjAdOK16+u/nHfiIrcE+sh8kZMaM0WllQKLI9rOUq6c2b7cwPkXdzfQESqvoqK6ug7U/Yyzug==
 
 parse5@^6.0.1:
   version "6.0.1"
