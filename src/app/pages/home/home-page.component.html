@@ -8,9 +8,10 @@
 <div class="sidebar-content">
   <h1 style="text-align: center">{{ activeElement.componentName }}</h1>
   <code> </code>
-  <div [ngSwitch]="activeElement.componentName">
+  <div [ngSwitch]="activeElement.name">
+    <app-inventory-plot *ngSwitchCase="'inventory-plot'"></app-inventory-plot>
     <app-station-select *ngSwitchCase="'station-select'"></app-station-select>
     <app-test *ngSwitchCase="'test'"></app-test>
-    <div *ngSwitchDefault></div>
+    <div *ngSwitchDefault>No component matching {{ activeElement.name }}</div>
   </div>
 </div>

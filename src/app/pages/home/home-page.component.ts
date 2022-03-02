@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { INavData } from '@coreui/angular';
-import { CUSTOM_ELEMENTS } from 'src/app/components/components.module';
+import { Subscription } from 'rxjs';
+import { CUSTOM_COMPONENTS } from 'src/app/components/components.module';
+import { CUSTOM_DIALOGS } from 'src/app/dialogs/dialogs.module';
 
 @Component({
   selector: 'app-home-page',
@@ -10,28 +12,50 @@ import { CUSTOM_ELEMENTS } from 'src/app/components/components.module';
 })
 export class HomePageComponent implements OnInit {
   size = 'show' as any;
-  customElements: any[] = [];
   navItems: INavData[] = [];
 
   public activeElement: any = {};
 
-  constructor(private router: Router, private route: ActivatedRoute) {
-    this.customElements = CUSTOM_ELEMENTS.map((element) => {
-      return { componentName: element.componentName };
-    });
-    this.navItems = this.customElements.map(({ componentName }) => ({
-      name: componentName,
-      url: `/home`,
-      linkProps: { queryParams: { componentName } },
-    }));
+  private routeParams$: Subscription | undefined;
+
+  constructor(private route: ActivatedRoute) {
+    this.navItems = this.generateNavItems();
   }
 
   ngOnInit(): void {
-    this.route.queryParamMap.subscribe((params) => {
+    this.routeParams$ = this.route.queryParamMap.subscribe((params) => {
       const componentName = params.get('componentName');
-      this.activeElement =
-        this.customElements.find((el) => el.componentName === componentName) || this.customElements[0];
+      this.activeElement = this.navItems.find((el) => el.name === componentName) || this.navItems[0];
+      console.log({ componentName, activeElement: this.activeElement });
     });
+  }
+
+  ngOnDestroy() {
+    this.routeParams$?.unsubscribe();
+  }
+
+  /** Generate a list of entries for sidebar nav and component lookup */
+  private generateNavItems(): INavData[] {
+    const components = CUSTOM_COMPONENTS.map((element) => {
+      return { componentName: element.componentName };
+    });
+    const dialogs = CUSTOM_DIALOGS.map((element) => {
+      return { componentName: element.componentName };
+    });
+    return [
+      { title: true, name: 'Dialogs' },
+      ...dialogs.map((d) => this.createComponentNavItem(d.componentName)),
+      { title: true, name: 'Components' },
+      ...components.map((d) => this.createComponentNavItem(d.componentName)),
+    ];
+  }
+
+  private createComponentNavItem(componentName: string): INavData {
+    return {
+      name: componentName,
+      url: `/home`,
+      linkProps: { queryParams: { componentName } },
+    };
   }
 
   handleItemSelected(e: any) {
