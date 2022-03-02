@@ -26,13 +26,13 @@ Changes within the `src` folder will be live-reloaded
 Use angular cli to scaffold out a new component
 
 ```
-yarn ng g component components/my-example --skip-import --view-encapsulation emulated
+yarn ng g component components/my-example --skip-import --view-encapsulation Emulated
 ```
 
 or for a dialog
 
 ```
-yarn ng g component dialogs/my-example --type dialog --skip-import --view-encapsulation emulated
+yarn ng g component dialogs/my-example --type dialog --skip-import --view-encapsulation Emulated
 ```
 
 Provide a static `componentName` property - this will be used when importing as a webcomponent
