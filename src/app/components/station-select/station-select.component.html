@@ -1,16 +1,16 @@
-<div style="max-height: 30vh; overflow: auto">
-  <table cTable style="width: 100%">
-    <thead>
-      <tr>
-        <th scope="col">Station ID</th>
-        <th scope="col">Station Name</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let station of stations">
-        <th scope="row">{{ station.station_id }}</th>
-        <td>{{ station.station_name }}</td>
-      </tr>
-    </tbody>
-  </table>
-</div>
+<table cTable style="width: 100%">
+  <thead>
+    <tr>
+      <th scope="col">Station ID</th>
+      <th scope="col">Station Name</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr *ngFor="let station of stations">
+      <th scope="row">{{ station.station_id }}</th>
+      <td>{{ station.station_name }}</td>
+    </tr>
+  </tbody>
+</table>
+<app-loader style="min-height: 200px"></app-loader>

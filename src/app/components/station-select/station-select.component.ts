@@ -9,6 +9,7 @@ import { OpenCDMSAPIModel } from 'src/models';
   encapsulation: ViewEncapsulation.ShadowDom,
 })
 export class StationSelectComponent implements OnInit {
+  dataIsLoading = true;
   public stations: OpenCDMSAPIModel.components['schemas']['StationQueryResponse']['result'] = [];
   public static componentName = 'station-select';
 
@@ -20,5 +21,6 @@ export class StationSelectComponent implements OnInit {
     if (res) {
       this.stations = res.data.result;
     }
+    this.dataIsLoading = false;
   }
 }
