@@ -9,7 +9,7 @@ abstract class ComponentBase {
   selector: 'app-test',
   templateUrl: './test.component.html',
   styleUrls: ['./test.component.scss'],
-  encapsulation: ViewEncapsulation.ShadowDom,
+  encapsulation: ViewEncapsulation.Emulated,
 })
 export class TestComponent implements ComponentBase {
   public static componentName = 'test';

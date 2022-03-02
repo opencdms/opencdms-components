@@ -1,13 +1,11 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 
 @Component({
   selector: 'app-loader',
   templateUrl: './loader.component.html',
   styleUrls: ['./loader.component.scss'],
-  encapsulation: ViewEncapsulation.Emulated, // will not work with shadow dom as uses classes
+  encapsulation: ViewEncapsulation.Emulated,
 })
-export class LoaderComponent implements OnInit {
-  constructor() {}
-
-  ngOnInit(): void {}
+export class LoaderComponent {
+  public static componentName = 'loader';
 }
