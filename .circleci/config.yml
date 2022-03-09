@@ -116,7 +116,7 @@ jobs:
 workflows:
   version: 2
   main_workflow:
-    # by default jobs will run concurrently, so specify requires if want to run sequentially
+    # by default jobs will run concurrently, use requires to run sequentially
     jobs:
       #---------------------- Test ----------------------
       - test:
@@ -124,13 +124,10 @@ workflows:
       #---------------------- Build ----------------------
       - build:
           name: Build
-          requires:
-            - Test
       #----------------------  Deploy ----------------------
       - deploy_vercel:
           name: Deploy to Vercel
           requires:
+            - Test
             - Build
           <<: *filter_only_main
-          context:
-            - vercel-context
