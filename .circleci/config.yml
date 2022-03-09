@@ -72,6 +72,10 @@ commands:
 #  Jobs - Independently specified lists of tasks and environments for execution
 ######################################################################################################
 jobs:
+  setup:
+    docker: *base_image
+    steps:
+      - setup_repo
   test:
     docker: *base_image
     resource_class: medium
@@ -101,7 +105,8 @@ workflows:
   main_workflow:
     # by default jobs will run concurrently, so specify requires if want to run sequentially
     jobs:
-      - setup_repo
+      - setup:
+          name: Setup Repo
       #---------------------- Test ----------------------
       - test:
           name: Test
