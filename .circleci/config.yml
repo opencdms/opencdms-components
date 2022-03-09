@@ -1,26 +1,136 @@
-# Use the latest 2.1 version of CircleCI pipeline process engine.
-# See: https://circleci.com/docs/2.0/configuration-reference
 version: 2.1
+######################################################################################################
+# Pre-Requisites
+#
+# In order to use these scripts various env variables need to be set on CircleCI
+# See `packages/documentation/docs/Deployment/circle-ci.md` for more information
+#
+# For general config info see: https://circleci.com/docs/2.0/configuration-reference
+######################################################################################################
 
-# Define a job to be invoked later in a workflow.
-# See: https://circleci.com/docs/2.0/configuration-reference/#jobs
-jobs:
-  say-hello:
-    # Specify the execution environment. You can specify an image from Dockerhub or use one of our Convenience Images from CircleCI's Developer Hub.
-    # See: https://circleci.com/docs/2.0/configuration-reference/#docker-machine-macos-windows-executor
-    docker:
-      - image: cimg/base:stable
-    # Add steps to the job
-    # See: https://circleci.com/docs/2.0/configuration-reference/#steps
+######################################################################################################
+#  Orbs - preconfigured environments for running specific jobs
+######################################################################################################
+
+orbs:
+  # Used to install browser into cimg/node
+  browser-tools: circleci/browser-tools@1.1.0
+######################################################################################################
+#  Aliases - code snippets that can be included inline in any other markup
+######################################################################################################
+aliases:
+  # use a base image running node v16 with chrome/firefox browsers preinstalled
+  - &base_image
+    - image: cimg/node:16.14-browsers
+
+  # restore/install/save can all be done with a single circle-ci orb, but less flexible and breaks intellisense
+  - &restore_yarn_cache
+    restore_cache:
+      name: Restore yarn cache
+      keys:
+        # https://circleci.com/docs/2.0/caching/
+        # https://circleci.com/docs/2.0/yarn/
+        # when lock file changes, use increasingly general patterns to restore cache (also need to change `save_cache` path)
+        # NOTE - if changing base image or received cache permission denied may need to bump version v3->v4 or similar (clears after 15d)
+        - yarn-packages-v1-{{ checksum "yarn.lock" }}
+        - yarn-packages-v1-
+
+  - &install_packages
+    run:
+      name: Install Packages
+      command: yarn install --immutable
+      environment:
+        YARN_CACHE_FOLDER: /tmp/.yarn/cache
+
+    # Example debugging commands for use troubleshooting caching (du will exit with status 141)
+  - &save_yarn_cache
+    save_cache:
+      # note - if moving to workspaces include paths: https://discuss.circleci.com/t/yarn-cached-install-slow/34823/2
+      # depending on whether enableGlobalCache is set to true or not (and windows/linux) these paths may vary
+      paths:
+        - /tmp/.yarn/cache
+      key: yarn-packages-v1-{{ checksum "yarn.lock" }}
+
+  - &filter_only_main
+    filters:
+      branches:
+        only:
+          - main
+
+######################################################################################################
+#  Commands - Reusable collections of steps
+######################################################################################################
+commands:
+  setup_repo:
+    description: checkout repo and install packages
     steps:
       - checkout
-      - run:
-          name: "Say hello"
-          command: "echo Hello, World!"
+      - *restore_yarn_cache
+      - *install_packages
+      - *save_yarn_cache
 
-# Invoke jobs via workflows
-# See: https://circleci.com/docs/2.0/configuration-reference/#workflows
+######################################################################################################
+#  Jobs - Independently specified lists of tasks and environments for execution
+######################################################################################################
+jobs:
+  test:
+    docker: *base_image
+    resource_class: medium
+    steps:
+      - setup_repo
+      - browser-tools/install-chrome
+      - browser-tools/install-chromedriver
+      - run:
+          command: yarn test --watch=false
+        # environment:
+        # CHROME_BIN: /usr/local/bin/google-chrome
+  build:
+    docker: *base_image
+    resource_class: medium
+    steps:
+      - setup_repo
+      - run:
+          command: yarn build
+      - persist_to_workspace:
+          root: .
+          paths:
+            - dist
+  deploy_vercel:
+    docker: *base_image
+    resource_class: small
+    steps:
+      - setup_repo
+      - attach_workspace:
+          at: "."
+      - run: |
+          mkdir .vercel
+          echo '{"orgId":"$VERCEL_ORG_ID","projectId":"$VERCEL_ORG_ID"}'' > .vercel/project.json
+      - run:
+          command: |
+            npm i -g vercel
+            vercel deploy -t $VERCEL_TOKEN
+
+######################################################################################################
+#  Workflows - Collections of jobs to define overall processes
+######################################################################################################
 workflows:
-  say-hello-workflow:
+  version: 2
+  main_workflow:
+    # by default jobs will run concurrently, so specify requires if want to run sequentially
     jobs:
-      - say-hello
+      #---------------------- Test ----------------------
+      - test:
+          name: Test
+      #---------------------- Build ----------------------
+      - build:
+          name: Build
+          requires:
+            - Test
+      #----------------------  Deploy ----------------------
+      - deploy_vercel:
+          name: Deploy to Vercel
+          requires:
+            - Build
+          <<: *filter_only_main
+          context:
+            - vercel-context
