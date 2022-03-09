@@ -82,8 +82,8 @@ jobs:
       - browser-tools/install-chromedriver
       - run:
           command: yarn test --watch=false
-        environment:
-          # CHROME_BIN: /usr/local/bin/google-chrome
+        # environment:
+        # CHROME_BIN: /usr/local/bin/google-chrome
   build:
     docker: *base_image
     resource_class: medium
