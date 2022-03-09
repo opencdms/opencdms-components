@@ -13,14 +13,15 @@ version: 2.1
 ######################################################################################################
 
 orbs:
-
+  # Used to install browser into cimg/node
+  browser-tools: circleci/browser-tools@1.1.0
 ######################################################################################################
 #  Aliases - code snippets that can be included inline in any other markup
 ######################################################################################################
 aliases:
   # use a base image running node v16 with chrome/firefox browsers preinstalled
   - &base_image
-    - image: cimg/node:16.13.1-browsers
+    - image: cimg/node:16.14-browsers
 
   # restore/install/save can all be done with a single circle-ci orb, but less flexible and breaks intellisense
   - &restore_yarn_cache
@@ -77,8 +78,12 @@ jobs:
     resource_class: medium
     steps:
       - setup_repo
+      - browser-tools/install-chrome
+      - browser-tools/install-chromedriver
       - run:
           command: yarn test --watch=false
+        environment:
+          # CHROME_BIN: /usr/local/bin/google-chrome
   build:
     docker: *base_image
     resource_class: medium
@@ -103,7 +108,7 @@ jobs:
       - run:
           command: |
             npm i -g vercel
-            vercel
+            vercel deploy -t $VERCEL_TOKEN
 
 ######################################################################################################
 #  Workflows - Collections of jobs to define overall processes
