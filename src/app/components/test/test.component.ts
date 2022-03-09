@@ -1,18 +1,26 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { TestService } from '../../services/test.service';
+import { Component, ViewEncapsulation } from '@angular/core';
+import { OpenCDMSApiService } from 'src/app/services/opencdms-api.service';
+
+abstract class ComponentBase {
+  public static componentName: string = '';
+}
 
 @Component({
   selector: 'app-test',
   templateUrl: './test.component.html',
   styleUrls: ['./test.component.scss'],
-  encapsulation: ViewEncapsulation.ShadowDom,
+  encapsulation: ViewEncapsulation.Emulated,
 })
-export class TestComponent implements OnInit {
+export class TestComponent implements ComponentBase {
   public static componentName = 'test';
 
-  constructor(private testService: TestService) {}
+  constructor(private api: OpenCDMSApiService) {}
 
-  ngOnInit(): void {
-    this.testService.test();
+  public async fetchData() {
+    const req = this.api.path('/v1/climsoft-users/').method('get').create();
+    const response = await req({}).catch((err) => this.api.handleError(err));
+    if (response) {
+      console.log('response', response.data);
+    }
   }
 }
