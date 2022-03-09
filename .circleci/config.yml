@@ -72,26 +72,31 @@ commands:
 #  Jobs - Independently specified lists of tasks and environments for execution
 ######################################################################################################
 jobs:
-  setup:
-    docker: *base_image
-    steps:
-      - setup_repo
   test:
     docker: *base_image
     resource_class: medium
     steps:
+      - setup_repo:
       - run:
           command: yarn test --watch=false
   build:
     docker: *base_image
     resource_class: medium
     steps:
+      - setup_repo:
       - run:
           command: yarn build
+      - persist_to_workspace:
+          root: .
+          paths:
+            - dist
   deploy_vercel:
     docker: *base_image
     resource_class: small
     steps:
+      - setup_repo:
+      - attach_workspace:
+          at: "."
       - run: |
           mkdir .vercel
           echo '{"orgId":"$VERCEL_ORG_ID","projectId":"$VERCEL_ORG_ID"}'' > .vercel/project.json
@@ -108,8 +113,6 @@ workflows:
   main_workflow:
     # by default jobs will run concurrently, so specify requires if want to run sequentially
     jobs:
-      - setup:
-          name: Setup Repo
       #---------------------- Test ----------------------
       - test:
           name: Test
