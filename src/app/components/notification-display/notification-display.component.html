@@ -1,0 +1,16 @@
+<div *ngFor="let notification of notifications; index as i">
+  <c-toast [autohide]="false" [fade]="true" [visible]="notification.visible" placement="top-end" position="absolute">
+    <c-toast-header [closeButton]="false">
+      <span>{{ notification.title }}</span>
+      <button
+        cbuttonclose
+        class="ms-auto btn-close"
+        type="button"
+        style="outline: 0px"
+        size="sm"
+        (click)="closeNotification(i)"
+      ></button>
+    </c-toast-header>
+    <c-toast-body>{{ notification.text }}</c-toast-body>
+  </c-toast>
+</div>

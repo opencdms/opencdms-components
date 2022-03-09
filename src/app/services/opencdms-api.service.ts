@@ -1,26 +1,8 @@
 import { Injectable } from '@angular/core';
-import { Fetcher, Middleware } from 'openapi-typescript-fetch';
+import { Fetcher, Middleware, ApiError } from 'openapi-typescript-fetch';
+import { environment } from 'src/environments/environment';
 import { OpenCDMSAPIModel } from 'src/models';
-
-// Add a type-safe fetch
-const fetcher = Fetcher.for<OpenCDMSAPIModel.paths>();
-
-// Middleware
-const loggerMiddleware: Middleware = async (url, init, next) => {
-  console.log(`[Req] ${url}`);
-  const response = await next(url, init);
-  console.log(`[Res] ${url}`, response);
-  return response;
-};
-
-// global configuration
-fetcher.configure({
-  baseUrl: 'https://api.opencdms.org/climsoft',
-  init: {
-    headers: {},
-  },
-  use: [loggerMiddleware], // middlewares
-});
+import { NotificationService } from './notification.service';
 
 /** 
  * Provide access to OpenCDMS Api Endpoints 
@@ -40,10 +22,56 @@ fetcher.configure({
 })
 export class OpenCDMSApiService {
   /** Provide access to typed api path endpoints */
-  public path = fetcher.path;
+  public get path() {
+    return this.fetcher.path;
+  }
+
+  private fetcher = Fetcher.for<OpenCDMSAPIModel.paths>();
+
+  constructor(private notificationService: NotificationService) {
+    this.addLoggerMiddleware();
+  }
 
   /** Optional error handler can be provided to callbacks */
   public handleError(error: any) {
+    console.group('[Error]');
     console.error(error);
+    if (error && typeof error === 'object') {
+      Object.keys(error).forEach((key) => {
+        console.log(key, error[key]);
+      });
+    }
+    console.groupEnd;
+  }
+
+  private addLoggerMiddleware() {
+    // Add a type-safe fetch
+    // Middleware
+    const loggerMiddleware: Middleware = async (url, init, next) => {
+      const id = this.generateTimestamp();
+      console.log(`[Req] ${url}`);
+      try {
+        const response = await next(url, init);
+        console.log(`[Res] ${url}`, response);
+        return response;
+      } catch (error) {
+        const { url, data } = error as ApiError;
+        const endpoint = url.replace(environment.opencdmsServerEndpoint, '');
+        this.notificationService.createNotification({ title: endpoint, text: data.detail, meta: error });
+        return null as any;
+      }
+    };
+    // global configuration
+    this.fetcher.configure({
+      baseUrl: environment.opencdmsServerEndpoint,
+      init: {
+        headers: {},
+      },
+      use: [loggerMiddleware], // middlewares
+    });
+  }
+
+  private generateTimestamp() {
+    return new Date().getTime();
   }
 }
