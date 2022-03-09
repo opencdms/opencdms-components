@@ -99,16 +99,19 @@ jobs:
     docker: *base_image
     resource_class: small
     steps:
-      - setup_repo
+      - checkout
       - attach_workspace:
           at: "."
-      - run: |
-          mkdir .vercel
-          echo '{"orgId":"$VERCEL_ORG_ID","projectId":"$VERCEL_ORG_ID"}'' > .vercel/project.json
       - run:
+          name: Populate Vercel Credentials
           command: |
-            npm i -g vercel
-            vercel deploy -t $VERCEL_TOKEN
+            mkdir .vercel
+            echo '{"orgId":"$VERCEL_ORG_ID","projectId":"$VERCEL_PROJECT_ID"}' > .vercel/project.json
+      - run:
+          name: Deploy to Vercel production
+          command: |
+            sudo npm i -g vercel
+            vercel --prod --token $VERCEL_TOKEN
 
 ######################################################################################################
 #  Workflows - Collections of jobs to define overall processes
