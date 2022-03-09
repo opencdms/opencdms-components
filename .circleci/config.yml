@@ -76,14 +76,14 @@ jobs:
     docker: *base_image
     resource_class: medium
     steps:
-      - setup_repo:
+      - setup_repo
       - run:
           command: yarn test --watch=false
   build:
     docker: *base_image
     resource_class: medium
     steps:
-      - setup_repo:
+      - setup_repo
       - run:
           command: yarn build
       - persist_to_workspace:
@@ -94,7 +94,7 @@ jobs:
     docker: *base_image
     resource_class: small
     steps:
-      - setup_repo:
+      - setup_repo
       - attach_workspace:
           at: "."
       - run: |
