@@ -3,7 +3,9 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  componentServerEndpoint: 'https://opencdms-components-api-jnxkyuyk3q-ew.a.run.app',
+  opencdmsServerEndpoint: 'https://api.opencdms.org/climsoft',
 };
 
 /*
