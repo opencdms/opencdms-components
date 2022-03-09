@@ -120,7 +120,7 @@ workflows:
       - deploy_vercel:
           name: Deploy to Vercel
           requires:
-            - build
+            - Build
           <<: *filter_only_main
           context:
             - vercel-context
