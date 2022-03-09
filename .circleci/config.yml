@@ -114,7 +114,7 @@ workflows:
       - build:
           name: Build
           requires:
-            - test
+            - Test
           context: build-context
       #----------------------  Deploy ----------------------
       - deploy_vercel:
