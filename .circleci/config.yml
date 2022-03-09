@@ -116,8 +116,6 @@ workflows:
       #---------------------- Test ----------------------
       - test:
           name: Test
-          requires:
-            - Setup Repo
       #---------------------- Build ----------------------
       - build:
           name: Build
