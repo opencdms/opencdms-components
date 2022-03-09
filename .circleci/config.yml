@@ -92,6 +92,9 @@ jobs:
     docker: *base_image
     resource_class: small
     steps:
+      - run: |
+          mkdir .vercel
+          echo '{"orgId":"$VERCEL_ORG_ID","projectId":"$VERCEL_ORG_ID"}'' > .vercel/project.json
       - run:
           command: |
             npm i -g vercel
@@ -110,12 +113,13 @@ workflows:
       #---------------------- Test ----------------------
       - test:
           name: Test
+          requires:
+            - Setup Repo
       #---------------------- Build ----------------------
       - build:
           name: Build
           requires:
             - Test
-          context: build-context
       #----------------------  Deploy ----------------------
       - deploy_vercel:
           name: Deploy to Vercel
