@@ -6,9 +6,10 @@ import { StationSelectComponent } from './station-select/station-select.componen
 import { TestComponent } from './test/test.component';
 import { LoaderComponent } from './loader/loader.component';
 import { NotificationDisplayComponent } from './notification-display/notification-display.component';
+import { ElementSelectComponent } from './element-select/element-select.component';
 
 /** Components to export as standalone webcomponents */
-export const CUSTOM_COMPONENTS = [TestComponent, StationSelectComponent];
+export const CUSTOM_COMPONENTS = [TestComponent, StationSelectComponent, ElementSelectComponent];
 
 /** Components shared locally but not exported */
 const CORE_COMPONENTS = [LoaderComponent, NotificationDisplayComponent];

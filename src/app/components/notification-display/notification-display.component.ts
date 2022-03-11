@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 import { Subject, takeUntil } from 'rxjs';
 import { NotificationService, INotfication } from 'src/app/services/notification.service';
 
@@ -10,6 +10,7 @@ interface INotificationDisplay extends INotfication {
   selector: 'app-notification-display',
   templateUrl: './notification-display.component.html',
   styleUrls: ['./notification-display.component.scss'],
+  encapsulation: ViewEncapsulation.Emulated,
 })
 export class NotificationDisplayComponent {
   public notifications: INotificationDisplay[] = [];
