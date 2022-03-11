@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 
 export interface INotfication {
+  type: 'error' | 'success';
   title: string;
   text: string;
   meta?: any;

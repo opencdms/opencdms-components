@@ -4,6 +4,19 @@
   top: 1em;
   right: 1em;
 }
+.notification-icon {
+  width: 16px;
+  height: 16px;
+  background: var(--cui-info);
+  border-radius: 4px;
+  margin-right: 8px;
+  &[data-type="error"] {
+    background: var(--cui-danger);
+  }
+  &[data-type="success"] {
+    background: var(--cui-success);
+  }
+}
 
 // Hack - imported close button not displaying correctly
 button.btn-close {

@@ -25,7 +25,7 @@ export class HomePageComponent implements OnInit {
   ngOnInit(): void {
     this.routeParams$ = this.route.queryParamMap.subscribe((params) => {
       const componentName = params.get('componentName');
-      this.activeElement = this.navItems.find((el) => el.name === componentName) || this.navItems[0];
+      this.activeElement = this.navItems.find((el) => el.name === componentName) || this.navItems[1];
       console.log({ componentName, activeElement: this.activeElement });
     });
   }
