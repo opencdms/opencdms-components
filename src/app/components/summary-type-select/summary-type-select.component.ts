@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-summary-type-select',
   templateUrl: './summary-type-select.component.html',
   styleUrls: ['./summary-type-select.component.scss'],
+  encapsulation: ViewEncapsulation.Emulated,
 })
 export class SummaryTypeSelectComponent implements OnInit {
   public static componentName = 'summary-type-select';

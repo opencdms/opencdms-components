@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { FormBuilder } from '@angular/forms';
 import { CUSTOM_COMPONENTS_PREFIX } from '../register-webcomponents';
 import { CUSTOM_COMPONENTS } from './components.module';
 import { WebcomponentWrapper } from './webcomponentWrapper';
@@ -19,6 +20,7 @@ describe('WebcomponentWrapper', () => {
     jasmine.DEFAULT_TIMEOUT_INTERVAL = TIMEOUT;
     await TestBed.configureTestingModule({
       declarations: [WebcomponentWrapper],
+      providers: [FormBuilder],
     }).compileComponents();
     fixture = TestBed.createComponent(WebcomponentWrapper);
     component = fixture.componentInstance;

@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { FormBuilder } from '@angular/forms';
 
 import { SummaryTypeSelectComponent } from './summary-type-select.component';
 
@@ -8,9 +9,9 @@ describe('SummaryTypeSelectComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ SummaryTypeSelectComponent ]
-    })
-    .compileComponents();
+      declarations: [SummaryTypeSelectComponent],
+      providers: [FormBuilder],
+    }).compileComponents();
   });
 
   beforeEach(() => {

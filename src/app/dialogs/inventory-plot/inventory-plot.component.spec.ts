@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { FormBuilder } from '@angular/forms';
 
 import { InventoryPlotComponent } from './inventory-plot.component';
 
@@ -8,9 +9,9 @@ describe('InventoryPlotComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ InventoryPlotComponent ]
-    })
-    .compileComponents();
+      declarations: [InventoryPlotComponent],
+      providers: [FormBuilder],
+    }).compileComponents();
   });
 
   beforeEach(() => {

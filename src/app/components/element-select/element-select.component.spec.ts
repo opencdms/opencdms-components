@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ElementSelectComponent } from './element-select.component';
+import { LoaderComponent } from '../loader/loader.component';
 
 describe('ElementSelectComponent', () => {
   let component: ElementSelectComponent;
@@ -8,9 +9,8 @@ describe('ElementSelectComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ElementSelectComponent ]
-    })
-    .compileComponents();
+      declarations: [ElementSelectComponent, LoaderComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {
