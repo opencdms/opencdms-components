@@ -1,0 +1,8 @@
+<c-button-group [formGroup]="form" class="summary-type-container">
+  <ng-template ngFor let-option [ngForOf]="options" let-i="index">
+    <input class="btn-check" formControlName="type" [id]="'option-' + i" type="radio" [value]="option.value" />
+    <label (click)="setValue(option.value)" [for]="'option-' + i" class="form-check-label btn btn-ghost-primary">{{
+      option.label
+    }}</label>
+  </ng-template>
+</c-button-group>

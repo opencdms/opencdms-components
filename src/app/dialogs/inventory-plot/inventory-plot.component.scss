@@ -3,8 +3,13 @@
   border-color: var(--cui-btn-disabled-border-color, transparent);
 }
 // Use secondary styles for disabled
-.btn-primary {
+.btn-info {
   --cui-btn-disabled-bg: #9da5b1;
   --cui-btn-disabled-border-color: #9da5b1;
   --cui-btn-disabled-color: #000015;
+}
+.submit-button {
+  margin-left: 12px;
+  margin-top: 1em;
+  min-width: 100px;
 }

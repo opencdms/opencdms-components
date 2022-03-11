@@ -17,10 +17,12 @@
       </c-col>
       <c-col>
         <h4>Summary Type</h4>
+        <app-summary-type-select style="margin-bottom: 6em"></app-summary-type-select>
         <h4>Period</h4>
       </c-col>
     </c-row>
   </c-container>
-  <div>Form valid: {{ form.valid }}</div>
-  <button cbutton type="submit" color="primary" [disabled]="!form.valid" class="btn btn-primary">Submit</button>
+  <button cbutton type="submit" color="primary" [disabled]="!form.valid" class="submit-button btn btn-info">
+    Submit
+  </button>
 </form>

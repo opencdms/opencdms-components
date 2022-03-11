@@ -22,8 +22,7 @@ export class InventoryPlotComponent {
     element_ids: [],
   };
 
-  constructor() {
-    const fb = new FormBuilder();
+  constructor(fb: FormBuilder) {
     this.form = fb.group({
       station_ids: fb.control(this.dialogValues.station_ids, Validators.required),
       element_ids: fb.control(this.dialogValues.element_ids, Validators.required),
@@ -33,6 +32,7 @@ export class InventoryPlotComponent {
   public onSubmit(e: Event) {
     e.preventDefault;
     console.log('submitting', this.form.value);
+    alert('TODO');
   }
 
   setValue(key: keyof IDialogValues, value: any) {
