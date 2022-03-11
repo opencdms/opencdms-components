@@ -6,13 +6,8 @@
   </c-sidebar>
 </c-container>
 <div class="sidebar-content">
-  <h1 style="text-align: center">{{ activeElement.componentName }}</h1>
-  <code> </code>
-  <div [ngSwitch]="activeElement.name">
-    <app-inventory-plot *ngSwitchCase="'inventory-plot'"></app-inventory-plot>
-    <app-station-select *ngSwitchCase="'station-select'"></app-station-select>
-    <app-test *ngSwitchCase="'test'"></app-test>
-    <div *ngSwitchDefault>No component matching {{ activeElement.name }}</div>
-  </div>
+  <h1 style="text-align: center">{{ activeElement.name }}</h1>
+  <!-- Active component will be dynamically injected as webcomponent here -->
+  <div [innerHtml]="activeElementHtml"></div>
 </div>
 <app-notification-display></app-notification-display>
