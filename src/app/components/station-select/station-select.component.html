@@ -9,7 +9,7 @@
   <tbody>
     <tr
       *ngFor="let station of stations"
-      [class.table-active]="selectedStations[station.station_id]"
+      [class.table-primary]="selectedStations[station.station_id]"
       (click)="toggleStationSelected(station)"
     >
       <th scope="row">{{ station.station_id }}</th>
