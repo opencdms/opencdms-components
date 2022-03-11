@@ -76,8 +76,4 @@ export class HomePageComponent implements OnInit {
       linkProps: { queryParams: { componentName } },
     };
   }
-
-  handleItemSelected(e: any) {
-    console.log('item selected', e);
-  }
 }

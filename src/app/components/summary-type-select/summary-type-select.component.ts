@@ -21,13 +21,11 @@ export class SummaryTypeSelectComponent implements OnInit {
     this.form = new FormBuilder().group({
       type: fb.control('mean'),
     });
-    console.log('radio btn group', this.form);
   }
 
   ngOnInit(): void {}
 
   setValue(value: string): void {
     this.form.setValue({ type: value });
-    console.log('set value', value, this.form);
   }
 }
