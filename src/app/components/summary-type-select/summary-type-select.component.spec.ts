@@ -1,21 +1,21 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormBuilder } from '@angular/forms';
 
-import { InventoryPlotComponent } from './inventory-plot.component';
+import { SummaryTypeSelectComponent } from './summary-type-select.component';
 
-describe('InventoryPlotComponent', () => {
-  let component: InventoryPlotComponent;
-  let fixture: ComponentFixture<InventoryPlotComponent>;
+describe('SummaryTypeSelectComponent', () => {
+  let component: SummaryTypeSelectComponent;
+  let fixture: ComponentFixture<SummaryTypeSelectComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [InventoryPlotComponent],
+      declarations: [SummaryTypeSelectComponent],
       providers: [FormBuilder],
     }).compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(InventoryPlotComponent);
+    fixture = TestBed.createComponent(SummaryTypeSelectComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

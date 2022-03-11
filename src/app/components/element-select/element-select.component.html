@@ -1,0 +1,22 @@
+<table cTable hover bordered style="width: 100%" class="table table-hover">
+  <thead>
+    <tr>
+      <th scope="col">Element ID</th>
+      <th scope="col">Element Abbrev</th>
+      <th scope="col">Element Details</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr
+      *ngFor="let element of elements"
+      [class.table-primary]="selectedElements[element.element_id]"
+      (click)="toggleElementSelected(element)"
+    >
+      <th scope="row">{{ element.element_id }}</th>
+      <td>{{ element.abbreviation }}</td>
+      <td>{{ element.description }}</td>
+    </tr>
+  </tbody>
+</table>
+<app-loader style="min-height: 200px" *ngIf="dataIsLoading"></app-loader>

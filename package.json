@@ -10,8 +10,8 @@
     "build:components": "ng build --configuration production,webcomponents && node scripts/concat-bundles.js",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "opencdms:generate:types": "npx openapi-typescript https://api.opencdms.org/climsoft/openapi.json --output src/models/opencdms-api.ts",
-    "components:generate:types": "npx openapi-typescript https://opencdms-components-api-jnxkyuyk3q-ew.a.run.app/openapi.json --output src/models/components-api.ts"
+    "generate:types:opencdms": "npx openapi-typescript https://api.opencdms.org/climsoft/openapi.json --output src/models/opencdms-api.ts",
+    "generate:types:components": "npx openapi-typescript https://opencdms-components-api-jnxkyuyk3q-ew.a.run.app/openapi.json --output src/models/components-api.ts"
   },
   "private": true,
   "dependencies": {
