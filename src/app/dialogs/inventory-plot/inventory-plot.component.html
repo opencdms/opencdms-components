@@ -1,19 +1,26 @@
-<c-container>
-  <c-row>
-    <c-col>
-      <h4>Select Station</h4>
-      <app-station-select
-        style="max-height: 75vh; overflow: auto"
-        (valueChanged)="setStationIds($event)"
-      ></app-station-select>
-    </c-col>
-    <c-col>
-      <h4>Select Element</h4>
-      <!-- <app-station-select style="max-height: 50vh; overflow: auto"></app-station-select> -->
-    </c-col>
-    <c-col>
-      <h4>Summary Type</h4>
-      <h4>Period</h4>
-    </c-col>
-  </c-row>
-</c-container>
+<form (ngSubmit)="onSubmit($event)" [formGroup]="form">
+  <c-container>
+    <c-row>
+      <c-col>
+        <h4>Select Station</h4>
+        <app-station-select
+          style="max-height: 75vh; overflow: auto"
+          (valueChanged)="setStationIds($event)"
+        ></app-station-select>
+      </c-col>
+      <c-col>
+        <h4>Select Element</h4>
+        <app-element-select
+          style="max-height: 75vh; overflow: auto"
+          (valueChanged)="setElementIds($event)"
+        ></app-element-select>
+      </c-col>
+      <c-col>
+        <h4>Summary Type</h4>
+        <h4>Period</h4>
+      </c-col>
+    </c-row>
+  </c-container>
+  <div>Form valid: {{ form.valid }}</div>
+  <button cbutton type="submit" color="primary" [disabled]="!form.valid" class="btn btn-primary">Submit</button>
+</form>

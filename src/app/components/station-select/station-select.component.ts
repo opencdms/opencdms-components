@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output, ViewEncapsulation } from '@angular/core';
+import { Component, EventEmitter, HostBinding, OnInit, Output, ViewEncapsulation } from '@angular/core';
 import { OpenCDMSApiService } from 'src/app/services/opencdms-api.service';
 import { OpenCDMSAPIModel } from 'src/models';
 
@@ -11,13 +11,19 @@ type IStation = OpenCDMSAPIModel.components['schemas']['StationQueryResponse']['
   encapsulation: ViewEncapsulation.Emulated,
 })
 export class StationSelectComponent implements OnInit {
+  public static componentName = 'station-select';
   public dataIsLoading = true;
   public stations: IStation[] = [];
-  public static componentName = 'station-select';
 
   public selectedStations: { [station_id: string]: IStation } = {};
 
   @Output() valueChanged = new EventEmitter<IStation[]>();
+
+  /** Reflect selected value as host attribute */
+  @HostBinding('value')
+  get value(): IStation[] {
+    return Object.values(this.selectedStations);
+  }
 
   constructor(private api: OpenCDMSApiService) {}
 
@@ -36,6 +42,7 @@ export class StationSelectComponent implements OnInit {
     } else {
       this.selectedStations[station.station_id] = station;
     }
-    this.valueChanged.next(Object.values(this.selectedStations));
+    const value = Object.values(this.selectedStations);
+    this.valueChanged.next(value);
   }
 }

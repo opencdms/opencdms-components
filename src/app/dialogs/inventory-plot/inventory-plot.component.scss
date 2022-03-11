@@ -1,0 +1,10 @@
+.btn:disabled {
+  background-color: var(--cui-btn-disabled-bg);
+  border-color: var(--cui-btn-disabled-border-color, transparent);
+}
+// Use secondary styles for disabled
+.btn-primary {
+  --cui-btn-disabled-bg: #9da5b1;
+  --cui-btn-disabled-border-color: #9da5b1;
+  --cui-btn-disabled-color: #000015;
+}
