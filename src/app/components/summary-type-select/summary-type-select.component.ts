@@ -18,7 +18,7 @@ export class SummaryTypeSelectComponent implements OnInit {
   public form;
 
   constructor(fb: FormBuilder) {
-    this.form = new FormBuilder().group({
+    this.form = fb.group({
       type: fb.control('mean'),
     });
   }

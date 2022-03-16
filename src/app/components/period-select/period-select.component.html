@@ -1,0 +1,37 @@
+<form [formGroup]="form">
+  <h6>Start</h6>
+  <c-button-group class="radio-container">
+    <ng-template ngFor let-option [ngForOf]="startOptions" let-i="index">
+      <input class="btn-check" formControlName="start" [id]="'start-option-' + i" type="radio" [value]="option.value" />
+      <label
+        (click)="setValue('start', option.value)"
+        [for]="'option-' + i"
+        class="form-check-label btn btn-ghost-primary"
+      >
+        <div>{{ option.label }}</div>
+        <div class="sublabel">{{ option.sublabel || " " }}</div>
+      </label>
+    </ng-template>
+  </c-button-group>
+  <div class="custom-date-container">
+    <input type="date" [disabled]="form.value.start !== 'custom'" />
+  </div>
+
+  <h6>End</h6>
+  <c-button-group class="radio-container">
+    <ng-template ngFor let-option [ngForOf]="endOptions" let-i="index">
+      <input class="btn-check" formControlName="end" [id]="'end-option-' + i" type="radio" [value]="option.value" />
+      <label
+        (click)="setValue('end', option.value)"
+        [for]="'option-' + i"
+        class="form-check-label btn btn-ghost-primary"
+      >
+        <div>{{ option.label }}</div>
+        <div class="sublabel">{{ option.sublabel || " " }}</div>
+      </label>
+    </ng-template>
+  </c-button-group>
+  <div class="custom-date-container">
+    <input type="date" [disabled]="form.value.end !== 'custom'" />
+  </div>
+</form>
