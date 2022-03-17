@@ -7,6 +7,7 @@ import { CUSTOM_DIALOGS } from 'src/app/dialogs/dialogs.module';
 
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { CUSTOM_COMPONENTS_PREFIX } from 'src/app/register-webcomponents';
+import { environment } from 'src/environments/environment';
 
 interface IElementMeta extends INavData {
   name: string;
@@ -22,7 +23,7 @@ interface IElementMeta extends INavData {
 export class HomePageComponent implements OnInit {
   size = 'show' as any;
   navItems: IElementMeta[] = [];
-
+  public appVersion = environment.appVersion;
   public activeElement: IElementMeta = {} as any;
 
   public activeElementHtml?: SafeHtml;

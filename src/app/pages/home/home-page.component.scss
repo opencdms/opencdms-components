@@ -9,3 +9,10 @@ c-sidebar.no-collapse {
 .sidebar-content h1 {
   line-height: 64px;
 }
+.app-version {
+  position: absolute;
+  bottom: 0.5em;
+  width: 100%;
+  text-align: center;
+  opacity: 0.5;
+}
