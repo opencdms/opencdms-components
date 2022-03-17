@@ -1,12 +1,13 @@
-<form [formGroup]="form">
+<form [formGroup]="aliasForm">
   <h6>Start</h6>
   <c-button-group class="radio-container">
     <ng-template ngFor let-option [ngForOf]="startOptions" let-i="index">
       <input class="btn-check" formControlName="start" [id]="'start-option-' + i" type="radio" [value]="option.value" />
       <label
-        (click)="setValue('start', option.value)"
-        [for]="'option-' + i"
+        (click)="setPeriodByAlias('start', option.value)"
+        [for]="'start-option-' + i"
         class="form-check-label btn btn-ghost-primary"
+        [attr.data-input-disabled]="option.value !== 'custom' && !periodAliasValues.end[option.value] ? true : null"
       >
         <div>{{ option.label }}</div>
         <div class="sublabel">{{ option.sublabel || " " }}</div>
@@ -14,7 +15,13 @@
     </ng-template>
   </c-button-group>
   <div class="custom-date-container">
-    <input type="date" [disabled]="form.value.start !== 'custom'" />
+    <input
+      type="date"
+      #customStartInput
+      [disabled]="aliasForm.value.start !== 'custom'"
+      [value]="dateValues.start"
+      (change)="setPeriodCustomValue('start', customStartInput.value)"
+    />
   </div>
 
   <h6>End</h6>
@@ -22,9 +29,10 @@
     <ng-template ngFor let-option [ngForOf]="endOptions" let-i="index">
       <input class="btn-check" formControlName="end" [id]="'end-option-' + i" type="radio" [value]="option.value" />
       <label
-        (click)="setValue('end', option.value)"
-        [for]="'option-' + i"
+        (click)="setPeriodByAlias('end', option.value)"
+        [for]="'end-option-' + i"
         class="form-check-label btn btn-ghost-primary"
+        [attr.data-input-disabled]="option.value !== 'custom' && !periodAliasValues.end[option.value] ? true : null"
       >
         <div>{{ option.label }}</div>
         <div class="sublabel">{{ option.sublabel || " " }}</div>
@@ -32,6 +40,12 @@
     </ng-template>
   </c-button-group>
   <div class="custom-date-container">
-    <input type="date" [disabled]="form.value.end !== 'custom'" />
+    <input
+      type="date"
+      #customEndInput
+      [disabled]="aliasForm.value.end !== 'custom'"
+      [value]="dateValues.end"
+      (change)="setPeriodCustomValue('end', customEndInput.value)"
+    />
   </div>
 </form>

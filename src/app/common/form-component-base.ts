@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, Input } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, Input, Output } from '@angular/core';
 import { ControlValueAccessor } from '@angular/forms';
 
 @Component({
@@ -8,6 +8,8 @@ export class FormComponentBase implements ControlValueAccessor {
   private _value: any;
 
   constructor(private cdr: ChangeDetectorRef) {}
+
+  @Output() valueChanged = new EventEmitter<any>();
 
   @Input()
   get value(): any {
@@ -19,6 +21,7 @@ export class FormComponentBase implements ControlValueAccessor {
       this.onChange(v);
       this.markAsTouched();
       this.cdr.markForCheck();
+      this.valueChanged.emit(v);
     }
   }
 

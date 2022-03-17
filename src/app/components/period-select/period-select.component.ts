@@ -2,6 +2,28 @@ import { ChangeDetectorRef, Component, forwardRef, Input, ViewEncapsulation } fr
 import { FormBuilder, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { FormComponentBase } from 'src/app/common/form-component-base';
 
+type IPeriodName = 'start' | 'end';
+
+/** Shorthand options used to populate actual values from data */
+type IPeriodValueAlias = 'all' | 'any' | 'custom';
+
+interface IAliasOption {
+  label: string;
+  sublabel?: string;
+  value: IPeriodValueAlias;
+  aliasValue: string;
+}
+type IPeriodAliasValues = {
+  [name in IPeriodName]: { [value in IPeriodValueAlias]: string };
+};
+
+const PERIOD_ALIAS_VALUES: IPeriodAliasValues = {
+  start: { any: '', all: '', custom: '' },
+  end: { any: '', all: '', custom: '' },
+};
+
+type IAliasFormValues = { [name in IPeriodName]: IPeriodValueAlias };
+
 @Component({
   selector: 'app-period-select',
   templateUrl: './period-select.component.html',
@@ -20,31 +42,59 @@ export class PeriodSelectComponent extends FormComponentBase {
 
   @Input() set selectedStations(selectedStations: any) {
     console.log('setting stations', selectedStations);
+    // TODO - assign alias values based on available stations
   }
 
-  public form;
+  public periodAliasValues = PERIOD_ALIAS_VALUES;
+  public startOptions = this.generateStartOptions();
+  public endOptions = this.generateEndOptions();
 
-  public startOptions = [
-    { label: 'Earliest date', value: 'max-any' },
-    { label: 'Earliest date', sublabel: 'all stations', value: 'max-all' },
-    { label: 'Custom', value: 'custom' },
-  ];
-  public endOptions = [
-    { label: 'Latest date', sublabel: 'all stations', value: 'max-all' },
-    { label: 'Latest date', value: 'max-any' },
-    { label: 'Custom', value: 'custom' },
-  ];
+  public aliasForm;
+
+  public dateValues = { start: '', end: '' };
 
   constructor(fb: FormBuilder, cdr: ChangeDetectorRef) {
     super(cdr);
-    this.form = fb.group({
-      start: ['max-all'],
-      end: ['max-all'],
+    this.aliasForm = fb.group({
+      start: ['custom'],
+      end: ['custom'],
     });
   }
 
-  public setValue(field: string, value: any) {
-    this.form.patchValue({ [field]: value });
-    this.value = this.form.value;
+  /** Use a short-hand alias method to set the start or end period */
+  public setPeriodByAlias(period: IPeriodName, alias: IPeriodValueAlias) {
+    this.aliasForm.patchValue({ [period]: alias });
+    this.updateValues();
+  }
+
+  /** Manually specify the value for a given alias (e.g. 'custom' value) */
+  public setPeriodCustomValue(period: IPeriodName, customValue: string) {
+    this.periodAliasValues[period].custom = customValue;
+    this.updateValues();
+  }
+
+  /** Reflect selected period alias values to main value control */
+  private updateValues() {
+    const { start: startAlias, end: endAlias } = this.aliasForm.value as IAliasFormValues;
+    this.dateValues = {
+      start: this.periodAliasValues.start[startAlias],
+      end: this.periodAliasValues.end[endAlias],
+    };
+    this.value = [this.dateValues.start, this.dateValues.end];
+  }
+
+  private generateStartOptions(): IAliasOption[] {
+    return [
+      { label: 'Earliest date', value: 'any', aliasValue: this.periodAliasValues.start.any },
+      { label: 'Earliest date', value: 'all', aliasValue: this.periodAliasValues.start.all, sublabel: 'all stations' },
+      { label: 'Custom', value: 'custom', aliasValue: this.periodAliasValues.start.custom },
+    ];
+  }
+  private generateEndOptions(): IAliasOption[] {
+    return [
+      { label: 'Latest date', value: 'all', aliasValue: this.periodAliasValues.end.all, sublabel: 'all stations' },
+      { label: 'Latest date', value: 'any', aliasValue: this.periodAliasValues.end.any },
+      { label: 'Custom', value: 'custom', aliasValue: this.periodAliasValues.end.custom },
+    ];
   }
 }
