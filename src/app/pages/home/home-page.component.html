@@ -1,8 +1,9 @@
 <c-container fluid>
   <!-- Force sidebar to not collapse via margin -->
   <c-sidebar visible class="no-collapse">
-    <c-sidebar-brand>OpenCDMS Components</c-sidebar-brand>
+    <c-sidebar-brand> OpenCDMS Components </c-sidebar-brand>
     <c-sidebar-nav [navItems]="navItems"></c-sidebar-nav>
+    <div class="app-version">v{{ appVersion }}</div>
   </c-sidebar>
 </c-container>
 <div class="sidebar-content">
