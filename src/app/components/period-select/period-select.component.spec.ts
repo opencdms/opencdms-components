@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { FormBuilder } from '@angular/forms';
 
 import { PeriodSelectComponent } from './period-select.component';
 
@@ -8,9 +9,9 @@ describe('PeriodSelectComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ PeriodSelectComponent ]
-    })
-    .compileComponents();
+      declarations: [PeriodSelectComponent],
+      providers: [FormBuilder],
+    }).compileComponents();
   });
 
   beforeEach(() => {
