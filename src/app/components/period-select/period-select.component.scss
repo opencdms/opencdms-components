@@ -1,0 +1,19 @@
+:host {
+  display: block;
+  padding: 0.5rem;
+  // Match table border color (TODO - handle share/import);
+  border: 1px solid #d8dbe0;
+}
+.radio-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+.custom-date-container {
+  text-align: right;
+  padding: 1em 0;
+}
+.sublabel {
+  font-size: 0.8rem;
+  height: 1rem;
+}
