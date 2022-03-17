@@ -16,13 +16,15 @@
         ></app-element-select>
       </c-col>
       <c-col>
-        <h4>Summary Type</h4>
-        <app-summary-type-select style="margin-bottom: 6em"></app-summary-type-select>
         <h4>Period</h4>
+        <app-period-select formControlName="period"></app-period-select>
       </c-col>
     </c-row>
   </c-container>
   <button cbutton type="submit" color="primary" [disabled]="!form.valid" class="submit-button btn btn-info">
     Submit
   </button>
+  <div class="debug-info">
+    {{ form.value | json }}
+  </div>
 </form>
