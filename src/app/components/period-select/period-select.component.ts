@@ -92,8 +92,8 @@ export class PeriodSelectComponent extends FormComponentBase {
   }
   private generateEndOptions(): IAliasOption[] {
     return [
-      { label: 'Latest date', value: 'all', aliasValue: this.periodAliasValues.end.all, sublabel: 'all stations' },
       { label: 'Latest date', value: 'any', aliasValue: this.periodAliasValues.end.any },
+      { label: 'Latest date', value: 'all', aliasValue: this.periodAliasValues.end.all, sublabel: 'all stations' },
       { label: 'Custom', value: 'custom', aliasValue: this.periodAliasValues.end.custom },
     ];
   }
