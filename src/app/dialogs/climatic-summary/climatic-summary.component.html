@@ -1,0 +1,25 @@
+<form (ngSubmit)="onSubmit($event)" [formGroup]="form">
+  <c-container>
+    <c-row>
+      <c-col>
+        <h4>Select Station</h4>
+        <app-station-select style="max-height: 75vh; overflow: auto" formControlName="station_ids"></app-station-select>
+      </c-col>
+      <c-col>
+        <h4>Select Element</h4>
+        <app-element-select style="max-height: 75vh; overflow: auto" formControlName="element_ids"></app-element-select>
+      </c-col>
+      <c-col>
+        <h4>Period</h4>
+        <app-period-select formControlName="period"></app-period-select>
+      </c-col>
+
+    </c-row>
+  </c-container>
+  <button cbutton type="submit" color="primary" [disabled]="!form.valid" class="submit-button btn btn-info">
+    Submit
+  </button>
+  <div class="debug-info">
+    {{ form.value | json }}
+  </div>
+</form>
