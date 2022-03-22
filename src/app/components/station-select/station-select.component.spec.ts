@@ -10,6 +10,7 @@ describe('StationSelectComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [StationSelectComponent, LoaderComponent],
+      providers: [],
     }).compileComponents();
   });
 
