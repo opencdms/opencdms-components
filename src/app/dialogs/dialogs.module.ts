@@ -4,8 +4,9 @@ import { InventoryPlotComponent } from './inventory-plot/inventory-plot.componen
 import { ComponentsModule } from '../components/components.module';
 import { GridModule } from '@coreui/angular';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ClimaticSummaryComponent } from './climatic-summary/climatic-summary.component';
 
-export const CUSTOM_DIALOGS = [InventoryPlotComponent];
+export const CUSTOM_DIALOGS = [InventoryPlotComponent, ClimaticSummaryComponent];
 
 @NgModule({
   declarations: CUSTOM_DIALOGS,

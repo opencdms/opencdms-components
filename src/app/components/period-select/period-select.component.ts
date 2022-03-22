@@ -28,7 +28,7 @@ type IAliasFormValues = { [name in IPeriodName]: IPeriodValueAlias };
   selector: 'app-period-select',
   templateUrl: './period-select.component.html',
   styleUrls: ['./period-select.component.scss'],
-  encapsulation: ViewEncapsulation.None,
+  encapsulation: ViewEncapsulation.Emulated,
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
@@ -92,8 +92,8 @@ export class PeriodSelectComponent extends FormComponentBase {
   }
   private generateEndOptions(): IAliasOption[] {
     return [
-      { label: 'Latest date', value: 'all', aliasValue: this.periodAliasValues.end.all, sublabel: 'all stations' },
       { label: 'Latest date', value: 'any', aliasValue: this.periodAliasValues.end.any },
+      { label: 'Latest date', value: 'all', aliasValue: this.periodAliasValues.end.all, sublabel: 'all stations' },
       { label: 'Custom', value: 'custom', aliasValue: this.periodAliasValues.end.custom },
     ];
   }

@@ -1,4 +1,6 @@
-import { Component, EventEmitter, HostBinding, OnInit, Output, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectorRef, Component, forwardRef, OnInit, ViewEncapsulation } from '@angular/core';
+import { NG_VALUE_ACCESSOR } from '@angular/forms';
+import { FormComponentBase } from 'src/app/common/form-component-base';
 import { OpenCDMSApiService } from 'src/app/services/opencdms-api.service';
 import { OpenCDMSAPIModel } from 'src/models';
 
@@ -9,22 +11,23 @@ type IElement = OpenCDMSAPIModel.components['schemas']['ObsElementResponse']['re
   templateUrl: './element-select.component.html',
   styleUrls: ['./element-select.component.scss'],
   encapsulation: ViewEncapsulation.Emulated,
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => ElementSelectComponent),
+      multi: true,
+    },
+  ],
 })
-export class ElementSelectComponent implements OnInit {
+export class ElementSelectComponent extends FormComponentBase implements OnInit {
   public static componentName = 'element-select';
   public dataIsLoading = true;
   public selectedElements: { [element_id: number]: IElement } = {};
   public elements: IElement[] = [];
 
-  @Output() valueChanged = new EventEmitter<IElement[]>();
-
-  /** Reflect selected value as host attribute */
-  @HostBinding('value')
-  get value(): IElement[] {
-    return Object.values(this.selectedElements);
+  constructor(cdr: ChangeDetectorRef, private api: OpenCDMSApiService) {
+    super(cdr);
   }
-
-  constructor(private api: OpenCDMSApiService) {}
 
   async ngOnInit() {
     const req = this.api.path('/v1/obselements/').method('get').create();
@@ -41,7 +44,7 @@ export class ElementSelectComponent implements OnInit {
     } else {
       this.selectedElements[element.element_id] = element;
     }
-    const value = Object.values(this.selectedElements);
-    this.valueChanged.next(value);
+    const value = Object.values(this.selectedElements).map((el) => el.element_id);
+    this.value = value;
   }
 }

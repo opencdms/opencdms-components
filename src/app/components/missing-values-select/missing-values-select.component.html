@@ -1,0 +1,71 @@
+<form [formGroup]="form">
+  <!-- Enable/disable -->
+  <c-form-check>
+    <input cFormCheckInput id="_enabled" type="checkbox" formControlName="_enabled" />
+    <label cFormCheckLabel for="_enabled">Omit Missing Values</label>
+  </c-form-check>
+
+  <!-- Individual Values -->
+  <div class="missing-values-container" *ngIf="form.value._enabled">
+    <div class="missing-value-row">
+      <c-form-check>
+        <input cFormCheckInput id="naMaxAllowedEnabled" type="checkbox" formControlName="_naMaxAllowedEnabled" />
+        <label cFormCheckLabel for="naMaxAllowedEnabled">Maximum number of missing allowed</label>
+      </c-form-check>
+      <input
+        class="missing-value-input"
+        [attr.disabled]="form.value._naMaxAllowedEnabled ? null : true"
+        cFormControl
+        type="number"
+        formControlName="naMaxAllowed"
+      />
+    </div>
+
+    <div class="missing-value-row">
+      <c-form-check>
+        <input cFormCheckInput id="naMinRequiredEnabled" type="checkbox" formControlName="_naMinRequiredEnabled" />
+        <label cFormCheckLabel for="naMinRequiredEnabled">Minimum number of non-missing required</label>
+      </c-form-check>
+      <input
+        class="missing-value-input"
+        [attr.disabled]="form.value._naMinRequiredEnabled ? null : true"
+        cFormControl
+        type="number"
+        formControlName="naMinRequired"
+      />
+    </div>
+
+    <div class="missing-value-row">
+      <c-form-check>
+        <input cFormCheckInput id="naMaxPcEnabled" type="checkbox" formControlName="_naMaxPcEnabled" />
+        <label cFormCheckLabel for="naMaxPcEnabled">Maximum percentage of missing allowed</label>
+      </c-form-check>
+      <input
+        class="missing-value-input"
+        [attr.disabled]="form.value._naMaxPcEnabled ? null : true"
+        cFormControl
+        type="number"
+        formControlName="naMaxPc"
+      />
+    </div>
+
+    <div class="missing-value-row">
+      <c-form-check>
+        <input
+          cFormCheckInput
+          id="naMaxConsecutiveEnabled"
+          type="checkbox"
+          formControlName="_naMaxConsecutiveEnabled"
+        />
+        <label cFormCheckLabel for="naMaxConsecutiveEnabled">Maximum number of consecutive missing allowed</label>
+      </c-form-check>
+      <input
+        class="missing-value-input"
+        [attr.disabled]="form.value._naMaxConsecutiveEnabled ? null : true"
+        cFormControl
+        type="number"
+        formControlName="naMaxConsecutive"
+      />
+    </div>
+  </div>
+</form>

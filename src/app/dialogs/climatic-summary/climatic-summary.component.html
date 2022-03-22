@@ -1,4 +1,4 @@
-<form (ngSubmit)="onSubmit($event)" [formGroup]="form">
+<form class="dialog-form" (ngSubmit)="onSubmit($event)" [formGroup]="form">
   <c-container>
     <c-row>
       <c-col>
@@ -10,21 +10,13 @@
         <app-element-select style="max-height: 75vh; overflow: auto" formControlName="element_ids"></app-element-select>
       </c-col>
       <c-col>
-        <c-row>
-          <h4>Period</h4>
-          <app-period-select formControlName="period"></app-period-select>
-        </c-row>
-        <c-row style="margin-top: 2em">
-          <h4>Missing Values</h4>
-          <app-missing-values-select></app-missing-values-select>
-        </c-row>
+        <h4>Period</h4>
+        <app-period-select formControlName="period"></app-period-select>
       </c-col>
     </c-row>
   </c-container>
   <button cbutton type="submit" color="primary" [disabled]="!form.valid" class="dialog-submit-button btn btn-info">
     Submit
   </button>
-  <div class="dialog-debug-values">
-    {{ form.value | json }}
-  </div>
+  <div class="dialog-debug-values">{{ form.value | json }}</div>
 </form>
