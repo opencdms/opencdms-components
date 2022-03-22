@@ -12,7 +12,7 @@ interface IDialogValues {
 @Component({
   selector: 'app-inventory-plot',
   templateUrl: './inventory-plot.component.html',
-  styleUrls: ['./inventory-plot.component.scss'],
+  styleUrls: ['./inventory-plot.component.scss', '../dialogs.scss'],
   encapsulation: ViewEncapsulation.Emulated,
 })
 export class InventoryPlotComponent extends DialogBaseComponent {

@@ -6,7 +6,7 @@ import { DialogBaseComponent } from '../dialog.base';
 @Component({
   selector: 'app-climatic-summary',
   templateUrl: './climatic-summary.component.html',
-  styleUrls: ['./climatic-summary.component.scss'],
+  styleUrls: ['./climatic-summary.component.scss', '../dialogs.scss'],
 })
 export class ClimaticSummaryComponent extends DialogBaseComponent {
   public static componentName = 'climatic-summary';

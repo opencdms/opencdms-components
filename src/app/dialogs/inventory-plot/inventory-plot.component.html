@@ -15,10 +15,10 @@
       </c-col>
     </c-row>
   </c-container>
-  <button cbutton type="submit" color="primary" [disabled]="!form.valid" class="submit-button btn btn-info">
+  <button cbutton type="submit" color="primary" [disabled]="!form.valid" class="dialog-submit-button btn btn-info">
     Submit
   </button>
-  <div class="debug-info">
+  <div class="dialog-debug-values">
     {{ form.value | json }}
   </div>
 </form>

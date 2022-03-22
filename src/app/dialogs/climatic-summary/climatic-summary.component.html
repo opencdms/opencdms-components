@@ -1,4 +1,4 @@
-<form (ngSubmit)="onSubmit($event)" [formGroup]="form">
+<form class="dialog-form" (ngSubmit)="onSubmit($event)" [formGroup]="form">
   <c-container>
     <c-row>
       <c-col>
@@ -13,13 +13,10 @@
         <h4>Period</h4>
         <app-period-select formControlName="period"></app-period-select>
       </c-col>
-
     </c-row>
   </c-container>
-  <button cbutton type="submit" color="primary" [disabled]="!form.valid" class="submit-button btn btn-info">
+  <button cbutton type="submit" color="primary" [disabled]="!form.valid" class="dialog-submit-button btn btn-info">
     Submit
   </button>
-  <div class="debug-info">
-    {{ form.value | json }}
-  </div>
+  <div class="dialog-debug-values">{{ form.value | json }}</div>
 </form>
