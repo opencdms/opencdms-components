@@ -28,7 +28,7 @@ type IAliasFormValues = { [name in IPeriodName]: IPeriodValueAlias };
   selector: 'app-period-select',
   templateUrl: './period-select.component.html',
   styleUrls: ['./period-select.component.scss'],
-  encapsulation: ViewEncapsulation.None,
+  encapsulation: ViewEncapsulation.Emulated,
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
