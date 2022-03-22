@@ -3,17 +3,11 @@
     <c-row>
       <c-col>
         <h4>Select Station</h4>
-        <app-station-select
-          style="max-height: 75vh; overflow: auto"
-          (valueChanged)="setStationIds($event)"
-        ></app-station-select>
+        <app-station-select style="max-height: 75vh; overflow: auto" formControlName="station_ids"></app-station-select>
       </c-col>
       <c-col>
         <h4>Select Element</h4>
-        <app-element-select
-          style="max-height: 75vh; overflow: auto"
-          (valueChanged)="setElementIds($event)"
-        ></app-element-select>
+        <app-element-select style="max-height: 75vh; overflow: auto" formControlName="element_ids"></app-element-select>
       </c-col>
       <c-col>
         <h4>Period</h4>
