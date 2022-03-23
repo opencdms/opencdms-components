@@ -18,11 +18,11 @@ export class ResponseDisplayComponent {
   }
 
   public close() {
-    console.log('closing');
+    this.dialogDataService.submission.status = undefined;
   }
 
-  save() {
-    console.log('saving');
+  public async save() {
+    return this.dialogDataService.saveResponse();
   }
 }
 

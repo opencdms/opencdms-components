@@ -1,5 +1,6 @@
 import { Component, Inject } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { DialogDataService } from '../services/dialog-data.service';
 
 @Component({
   template: ``,
@@ -17,15 +18,19 @@ export class DialogBaseComponent {
    * }
    * ```
    * */
-  constructor(fb: FormBuilder, @Inject('formControlsConfig') formControlsConfig: { [key: string]: any }) {
+  constructor(
+    fb: FormBuilder,
+    @Inject('formControlsConfig') formControlsConfig: { [key: string]: any },
+    private dialogDataService: DialogDataService
+  ) {
     this.form = fb.group(formControlsConfig);
   }
 
   /** Handle submitting form */
-  public onSubmit(e: Event) {
+  public async onSubmit(e: Event) {
     e.preventDefault;
-    console.log('submitting', this.form.value);
-    alert('TODO');
+    this.form.disable();
+    await this.dialogDataService.submitDialog(this.form.value);
+    this.form.enable();
   }
-  
 }
