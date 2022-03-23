@@ -10,6 +10,7 @@ import {
   UtilitiesModule,
   GridModule,
 } from '@coreui/angular';
+import { IconModule } from '@coreui/icons-angular';
 import { StationSelectComponent } from './station-select/station-select.component';
 import { LoaderComponent } from './loader/loader.component';
 import { NotificationDisplayComponent } from './notification-display/notification-display.component';
@@ -17,6 +18,7 @@ import { ElementSelectComponent } from './element-select/element-select.componen
 import { SummaryTypeSelectComponent } from './summary-type-select/summary-type-select.component';
 import { PeriodSelectComponent } from './period-select/period-select.component';
 import { MissingValuesSelectComponent } from './missing-values-select/missing-values-select.component';
+import { ResponseDisplayComponent } from './response-display/response-display.component';
 
 /** Components to export as standalone webcomponents */
 export const CUSTOM_COMPONENTS = [
@@ -28,7 +30,7 @@ export const CUSTOM_COMPONENTS = [
 ];
 
 /** Components shared locally but not exported */
-const CORE_COMPONENTS = [LoaderComponent, NotificationDisplayComponent];
+const CORE_COMPONENTS = [LoaderComponent, NotificationDisplayComponent, ResponseDisplayComponent];
 
 /** Modules imported from CoreUI */
 const CORE_UI_IMPORTS = [
@@ -39,6 +41,7 @@ const CORE_UI_IMPORTS = [
   ToastModule,
   UtilitiesModule,
   GridModule,
+  IconModule,
 ];
 
 @NgModule({

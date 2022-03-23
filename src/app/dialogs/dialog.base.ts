@@ -1,5 +1,9 @@
 import { Component, Inject } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { ComponentsApiModel } from 'src/models';
+import { DialogDataService } from '../services/dialog-data.service';
+
+export type IDialogEndpoint = keyof ComponentsApiModel.paths;
 
 @Component({
   template: ``,
@@ -17,15 +21,20 @@ export class DialogBaseComponent {
    * }
    * ```
    * */
-  constructor(fb: FormBuilder, @Inject('formControlsConfig') formControlsConfig: { [key: string]: any }) {
+  constructor(
+    @Inject('formControlsConfig') formControlsConfig: { [key: string]: any },
+    fb: FormBuilder,
+    public dialogDataService: DialogDataService
+  ) {
     this.form = fb.group(formControlsConfig);
   }
 
   /** Handle submitting form */
-  public onSubmit(e: Event) {
+  public async onSubmit(e: Event) {
     e.preventDefault;
-    console.log('submitting', this.form.value);
-    alert('TODO');
+    this.form.disable();
+    // TODO - decide how to link best to individual dialog endpoints/methods
+    console.log('TODO');
+    this.form.enable();
   }
-  
 }

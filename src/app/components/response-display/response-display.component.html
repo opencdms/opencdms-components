@@ -1,0 +1,37 @@
+<c-toast [autohide]="false" [fade]="true" [visible]="submission.status" class="response-container">
+  <c-toast-header [closeButton]="false">
+    {{ submission.status }}
+    <button
+      cbuttonclose
+      class="ms-auto btn-close"
+      type="button"
+      style="outline: 0px"
+      size="sm"
+      (click)="close()"
+    ></button>
+  </c-toast-header>
+  <div [ngSwitch]="submission.status" class="response-content-container">
+    <!-- the same view can be shown in more than one case -->
+    <div *ngSwitchCase="'pending'">
+      <h2>Processing...</h2>
+      <div>{{ submission.request.params | json }}</div>
+    </div>
+    <div *ngSwitchCase="'success'">
+      <div class="image-container" *ngIf="submission.response.imageData">
+        <img [src]="submission.response.imageData" />
+      </div>
+    </div>
+    <div *ngSwitchCase="'error'">
+      <p>An error occurred, see console for more details</p>
+    </div>
+    <!--default case when there are no matches -->
+    <div *ngSwitchDefault>Request status: {{ submission.status }}</div>
+  </div>
+
+  <c-toast-header [closeButton]="false">
+    <button class="btn btn-primary save-button" (click)="save()">
+      <svg [cIcon]="icons.cilDataTransferDown" size="xl" title="List Icon"></svg>
+      <span>Save</span>
+    </button>
+  </c-toast-header>
+</c-toast>

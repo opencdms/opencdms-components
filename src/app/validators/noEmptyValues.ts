@@ -8,7 +8,6 @@ export function NoEmptyValuesValidator(): ValidatorFn {
   return (control: AbstractControl): ValidationErrors | null => {
     const value = control.value as any[];
     const isValid = validate(value);
-    console.log('validate', value, isValid);
     const errors: ValidationErrors = { NoEmptyValuesValidator: true };
     return isValid ? null : errors;
   };

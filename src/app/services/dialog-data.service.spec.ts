@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { ComponentsApiService } from './components-api.service';
+import { DialogDataService } from './dialog-data.service';
 
-describe('ComponentsApiService', () => {
-  let service: ComponentsApiService;
+describe('DialogDataService', () => {
+  let service: DialogDataService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(ComponentsApiService);
+    service = TestBed.inject(DialogDataService);
   });
 
   it('should be created', () => {
