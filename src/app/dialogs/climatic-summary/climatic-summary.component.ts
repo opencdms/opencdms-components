@@ -14,12 +14,12 @@ export class ClimaticSummaryComponent extends DialogBaseComponent {
 
   constructor(fb: FormBuilder, dialogDataService: DialogDataService) {
     super(
-      fb,
       {
         station_ids: [[], Validators.required],
         element_ids: [[], Validators.required],
         period: [['', ''], NoEmptyValuesValidator()],
       },
+      fb,
       dialogDataService
     );
   }

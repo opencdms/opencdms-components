@@ -2,11 +2,12 @@ import { Component, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { DialogDataService } from 'src/app/services/dialog-data.service';
 import { NoEmptyValuesValidator } from 'src/app/validators/noEmptyValues';
+import { ComponentsApiModel } from 'src/models';
 import { DialogBaseComponent } from '../dialog.base';
 
 interface IDialogValues {
   station_ids: string[];
-  element_ids: string[];
+  element_ids: number[];
   period: [string, string];
 }
 
@@ -21,19 +22,35 @@ export class InventoryPlotComponent extends DialogBaseComponent {
 
   constructor(fb: FormBuilder, dialogDataService: DialogDataService) {
     super(
-      fb,
       {
         station_ids: [[], Validators.required],
         element_ids: [[], Validators.required],
         period: [['', ''], NoEmptyValuesValidator()],
       },
+      fb,
       dialogDataService
     );
   }
 
-  private formatValues() {
+  public override async onSubmit(e: Event) {
+    const req = this.dialogDataService
+      .endpoint('/v1/products/inventory-plot/')
+      .method('post')
+      .create({ response_type: true });
+    const params = this.formatParamValues();
+    await this.dialogDataService.submitDialog(req, { ...params, response_type: 'base64' });
+  }
+
+  private formatParamValues(): ComponentsApiModel.components['schemas']['Body_create_v1_products_inventory_plot__post'] {
     const values = this.form.value as IDialogValues;
-    // TODO - handle mapping formValues to api params
+    return {
+      data_params: {
+        station_ids: values.station_ids.map((id) => Number(id)),
+        period: values.period,
+        elements: values.element_ids,
+      },
+      product_params: {},
+    };
   }
 
   setValue(key: keyof IDialogValues, value: any) {
