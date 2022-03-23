@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Fetcher, Middleware, ApiError } from 'openapi-typescript-fetch';
 import { environment } from 'src/environments/environment';
-import { OpenCDMSAPIModel } from 'src/models';
+import { ComponentsApiModel, OpenCDMSAPIModel } from 'src/models';
 import { NotificationService } from './notification.service';
 
 /** 
@@ -26,7 +26,14 @@ export class OpenCDMSApiService {
     return this.fetcher.path;
   }
 
+  /** Additional endpoints provided by the components server */
+  public get pathComponents() {
+    return this.fetcherComponents.path;
+  }
+
   private fetcher = Fetcher.for<OpenCDMSAPIModel.paths>();
+
+  private fetcherComponents = Fetcher.for<ComponentsApiModel.paths>();
 
   constructor(private notificationService: NotificationService) {
     this.addLoggerMiddleware();
@@ -66,10 +73,14 @@ export class OpenCDMSApiService {
     // global configuration
     this.fetcher.configure({
       baseUrl: environment.opencdmsServerEndpoint,
-      init: {
-        headers: {},
-      },
+      init: { headers: {} },
       use: [loggerMiddleware], // middlewares
+    });
+    // Components server configuration
+    this.fetcherComponents.configure({
+      baseUrl: environment.componentServerEndpoint,
+      init: { headers: {} },
+      use: [loggerMiddleware],
     });
   }
 
