@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { DialogDataService } from 'src/app/services/dialog-data.service';
 import { NoEmptyValuesValidator } from 'src/app/validators/noEmptyValues';
 import { DialogBaseComponent } from '../dialog.base';
 
@@ -11,12 +12,16 @@ import { DialogBaseComponent } from '../dialog.base';
 export class ClimaticSummaryComponent extends DialogBaseComponent {
   public static componentName = 'climatic-summary';
 
-  constructor(fb: FormBuilder) {
-    super(fb, {
-      station_ids: [[], Validators.required],
-      element_ids: [[], Validators.required],
-      period: [['', ''], NoEmptyValuesValidator()],
-    });
+  constructor(fb: FormBuilder, dialogDataService: DialogDataService) {
+    super(
+      fb,
+      {
+        station_ids: [[], Validators.required],
+        element_ids: [[], Validators.required],
+        period: [['', ''], NoEmptyValuesValidator()],
+      },
+      dialogDataService
+    );
   }
 
   ngOnInit(): void {}

@@ -1,5 +1,6 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { DialogDataService } from 'src/app/services/dialog-data.service';
 import { NoEmptyValuesValidator } from 'src/app/validators/noEmptyValues';
 import { DialogBaseComponent } from '../dialog.base';
 
@@ -18,12 +19,16 @@ interface IDialogValues {
 export class InventoryPlotComponent extends DialogBaseComponent {
   public static componentName = 'inventory-plot';
 
-  constructor(fb: FormBuilder) {
-    super(fb, {
-      station_ids: [[], Validators.required],
-      element_ids: [[], Validators.required],
-      period: [['', ''], NoEmptyValuesValidator()],
-    });
+  constructor(fb: FormBuilder, dialogDataService: DialogDataService) {
+    super(
+      fb,
+      {
+        station_ids: [[], Validators.required],
+        element_ids: [[], Validators.required],
+        period: [['', ''], NoEmptyValuesValidator()],
+      },
+      dialogDataService
+    );
   }
 
   private formatValues() {
