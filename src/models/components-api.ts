@@ -126,11 +126,11 @@ export interface components {
       names?: string;
     };
     /**
-     * FileResponseOption
+     * FileResponseType
      * @description An enumeration.
      * @enum {undefined}
      */
-    FileResponseOption: "file" | "base64" | "link";
+    FileResponseType: "file" | "base64" | "link";
     /** HTTPValidationError */
     HTTPValidationError: {
       /** Detail */
@@ -145,11 +145,20 @@ export interface components {
     };
     /** InventoryPlotParams */
     InventoryPlotParams: {
-      /** Date Time */
-      date_time: string;
-      /** Elements */
-      elements: string;
-      /** Station */
+      /**
+       * Date Time
+       * @default obsDatetime
+       */
+      date_time?: string;
+      /**
+       * Elements
+       * @default obsValue
+       */
+      elements?: string;
+      /**
+       * Station
+       * @default recordedFrom
+       */
       station?: string;
       /** Year */
       year?: string;
@@ -348,6 +357,11 @@ export interface operations {
     };
   };
   create_v1_products_inventory_plot__post: {
+    parameters: {
+      query: {
+        response_type: components["schemas"]["FileResponseType"];
+      };
+    };
     responses: {
       /** Successful Response */
       200: unknown;
@@ -426,7 +440,7 @@ export interface operations {
   image_test_v0_products_test_image_test_post: {
     parameters: {
       query: {
-        response_option: components["schemas"]["FileResponseOption"];
+        response_type: components["schemas"]["FileResponseType"];
       };
     };
     responses: {
