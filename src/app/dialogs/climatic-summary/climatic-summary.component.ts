@@ -18,7 +18,7 @@ export class ClimaticSummaryComponent extends DialogBaseComponent {
         station_ids: [[], Validators.required],
         element_ids: [[], Validators.required],
         period: [['', ''], NoEmptyValuesValidator()],
-        summary_type: ['', Validators.required],
+        summary_type: ['hourly', Validators.required],
       },
       fb,
       dialogDataService
