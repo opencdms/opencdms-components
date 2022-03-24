@@ -25,11 +25,11 @@ export class MissingValuesSelectComponent extends FormComponentBase {
     this.form = fb.group({
       _enabled: [false],
       _naMaxAllowedEnabled: [false],
-      naMaxAllowed: [1],
+      naMaxAllowed: [0],
       _naMinRequiredEnabled: [false],
       naMinRequired: [340],
       _naMaxPcEnabled: [false],
-      naMaxPc: [1],
+      naMaxPc: [0],
       _naMaxConsecutiveEnabled: [false],
       naMaxConsecutive: [4],
     });

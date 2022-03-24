@@ -6,7 +6,7 @@
   </c-form-check>
 
   <!-- Individual Values -->
-  <div class="missing-values-container" *ngIf="form.value._enabled">
+  <div class="missing-values-container" *ngIf="!form.value._enabled">
     <div class="missing-value-row">
       <c-form-check>
         <input cFormCheckInput id="naMaxAllowedEnabled" type="checkbox" formControlName="_naMaxAllowedEnabled" />
@@ -17,6 +17,7 @@
         [attr.disabled]="form.value._naMaxAllowedEnabled ? null : true"
         cFormControl
         type="number"
+        min="0"
         formControlName="naMaxAllowed"
       />
     </div>
@@ -31,6 +32,7 @@
         [attr.disabled]="form.value._naMinRequiredEnabled ? null : true"
         cFormControl
         type="number"
+        min="0"
         formControlName="naMinRequired"
       />
     </div>
@@ -38,13 +40,16 @@
     <div class="missing-value-row">
       <c-form-check>
         <input cFormCheckInput id="naMaxPcEnabled" type="checkbox" formControlName="_naMaxPcEnabled" />
-        <label cFormCheckLabel for="naMaxPcEnabled">Maximum percentage of missing allowed</label>
+        <label cFormCheckLabel for="naMaxPcEnabled">Maximum proportion of missing allowed</label>
       </c-form-check>
       <input
         class="missing-value-input"
         [attr.disabled]="form.value._naMaxPcEnabled ? null : true"
         cFormControl
         type="number"
+        min="0"
+        max="1"
+        step="0.01"
         formControlName="naMaxPc"
       />
     </div>
@@ -64,6 +69,7 @@
         [attr.disabled]="form.value._naMaxConsecutiveEnabled ? null : true"
         cFormControl
         type="number"
+        min="0"
         formControlName="naMaxConsecutive"
       />
     </div>

@@ -23,3 +23,7 @@
 .missing-value-input:disabled {
   opacity: 0.5;
 }
+// HACK - manually style invalid inputs, should ideally be automated with form validation
+input.ng-invalid {
+  border: 1px solid #e55353;
+}
