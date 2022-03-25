@@ -18,6 +18,7 @@ jobs:
         with:
           node-version: "16.x"
           registry-url: "https://npm.pkg.github.com"
+          always-auth: true
           # Defaults to the user or organization that owns the workflow file
           # scope: "@octocat"
       - name: Cache node modules
