@@ -2,9 +2,6 @@ name: Publish package to GitHub Packages
 on:
   release:
     types: [created]
-  push:
-    branches:
-      - feat/webcomponents-standalone
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -16,11 +13,11 @@ jobs:
       # Setup .npmrc file to publish to GitHub Packages
       - uses: actions/setup-node@v2
         with:
-          node-version: "14.x"
+          node-version: "16.x"
           registry-url: "https://npm.pkg.github.com"
           always-auth: true
           # Defaults to the user or organization that owns the workflow file
-          scope: "IDEMSInternational"
+          # scope: "IDEMSInternational"
       - name: Cache node modules
         uses: actions/cache@v2
         with:
@@ -31,6 +28,8 @@ jobs:
             ${{ runner.os }}-yarn-v1-
       - run: yarn install
       - run: yarn build:components
+      # TODO - authentication not working correctly, needs revising
+      # Possible issue: https://github.com/npm/cli/issues/2453
       - run: yarn npm publish
         env:
           NPM_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
