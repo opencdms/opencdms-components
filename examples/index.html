@@ -7,10 +7,14 @@
   </head>
   <body style="padding: 1em">
     <h1>Open CDMS Inventory Plot Example</h1>
-    <p>This example uses the <code>opencdms-inventory-plot</code> webcomponent to generate an inventory plot</p>
+    <p>
+      This example uses the <code>opencdms-inventory-plot</code> webcomponent to generate an inventory plot with
+      specific initial values
+    </p>
 
-    <opencdms-inventory-plot></opencdms-inventory-plot>
-    <!-- Defer component registration for faster page load -->
+    <opencdms-inventory-plot
+      initialvalue='{ "station_ids": [ 67774010, 67775050 ], "element_ids": [ 2, 4 ], "period": [ "2000-01-01", "2000-03-01" ] }'
+    ></opencdms-inventory-plot>
     <script defer src="../components/index.js"></script>
   </body>
 
