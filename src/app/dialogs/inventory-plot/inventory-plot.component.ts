@@ -10,6 +10,9 @@ interface IDialogValues {
   element_ids: number[];
   period: [string, string];
 }
+/** Data submission type combines expected body and query params */
+type IDialogDef = ComponentsApiModel.components['schemas']['Body_create_v1_products_inventory_plot__post'] &
+  ComponentsApiModel.operations['create_v1_products_inventory_plot__post']['parameters']['query'];
 
 @Component({
   selector: 'app-inventory-plot',
@@ -38,7 +41,7 @@ export class InventoryPlotComponent extends DialogBaseComponent {
       .method('post')
       .create({ response_type: true });
     const params = this.formatParamValues();
-    await this.dialogDataService.submitDialog(req, { ...params, response_type: 'base64' });
+    await this.dialogDataService.submitDialog<IDialogDef>(req, { ...params, response_type: 'base64' });
   }
 
   private formatParamValues(): ComponentsApiModel.components['schemas']['Body_create_v1_products_inventory_plot__post'] {

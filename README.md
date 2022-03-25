@@ -82,6 +82,8 @@ The examples folder contains demonstrations of custom-elements being used within
 
 - The fetch api tool used only supports response in form application/json, which makes handling filebuffer responses very tricky (converted to binary string which becomes easily corrupted when trying to convert back). As a result most api methods have the option to either return base64 encoded data or links to file for direct download, but in the future a different rest client may want to be considered.
 
+- API query methods currently have no process for batching queries. As a result most have queries have been specified with arbitrarily high limit parameters set instead
+
 ## Links and Resources
 
 https://fireship.io/lessons/angular-elements-quick-start-guide/

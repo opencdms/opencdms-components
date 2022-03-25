@@ -9,9 +9,10 @@
   --cui-btn-disabled-color: #000015;
 }
 .dialog-submit-button {
-  margin-left: 12px;
-  margin-top: 1em;
   min-width: 100px;
+  position: absolute;
+  top: 1em;
+  right: 1em;
 }
 .dialog-debug-values {
   margin-top: 1em;

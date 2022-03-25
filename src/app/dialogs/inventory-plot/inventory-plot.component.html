@@ -3,26 +3,26 @@
     <c-row>
       <c-col>
         <h4>Select Station</h4>
-        <app-station-select style="max-height: 75vh; overflow: auto" formControlName="station_ids"></app-station-select>
+        <app-station-select
+          style="max-height: calc(100vh - 10em); overflow: auto"
+          formControlName="station_ids"
+        ></app-station-select>
       </c-col>
       <c-col>
         <h4>Select Element</h4>
-        <app-element-select style="max-height: 75vh; overflow: auto" formControlName="element_ids"></app-element-select>
+        <app-element-select
+          style="max-height: calc(100vh - 10em); overflow: auto"
+          formControlName="element_ids"
+        ></app-element-select>
       </c-col>
       <c-col>
-        <c-row>
-          <h4>Period</h4>
-          <app-period-select formControlName="period"></app-period-select>
-        </c-row>
-        <c-row style="margin-top: 2em">
-          <h4>Missing Values</h4>
-          <app-missing-values-select></app-missing-values-select>
-        </c-row>
+        <h4>Period</h4>
+        <app-period-select formControlName="period"></app-period-select>
       </c-col>
     </c-row>
   </c-container>
   <button cbutton type="submit" color="primary" [disabled]="!form.valid" class="dialog-submit-button btn btn-info">
-    Submit
+    Generate
   </button>
   <div class="dialog-debug-values">
     {{ form.value | json }}
