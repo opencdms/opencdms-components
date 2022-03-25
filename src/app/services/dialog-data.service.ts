@@ -31,7 +31,7 @@ export class DialogDataService {
     return this.apiService.pathComponents;
   }
 
-  async submitDialog(req: TypedFetch<any>, params: any = {}) {
+  async submitDialog<T>(req: TypedFetch<any>, params: T) {
     this.submission.request.params = params;
     this.submission.status = 'pending';
     this.submission.request._raw = req;

@@ -57,13 +57,19 @@ export interface components {
     };
     /** ClimaticSummaryParams */
     ClimaticSummaryParams: {
-      /** Date Time */
-      date_time: string;
-      /** Station */
+      /**
+       * Date Time
+       * @default obsDatetime
+       */
+      date_time?: string;
+      /**
+       * Station
+       * @default recordedFrom
+       */
       station?: string;
       /**
        * Elements
-       * @default
+       * @default obsValue
        */
       elements?: unknown[];
       /** Year */
@@ -125,6 +131,12 @@ export interface components {
        */
       names?: string;
     };
+    /**
+     * DataFrameResponseType
+     * @description An enumeration.
+     * @enum {undefined}
+     */
+    DataFrameResponseType: "columns" | "records";
     /**
      * FileResponseType
      * @description An enumeration.
@@ -336,6 +348,11 @@ export interface components {
 
 export interface operations {
   create_v1_products_climatic_summary__post: {
+    parameters: {
+      query: {
+        response_type?: components["schemas"]["DataFrameResponseType"];
+      };
+    };
     responses: {
       /** Successful Response */
       200: {
