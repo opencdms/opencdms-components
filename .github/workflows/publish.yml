@@ -20,7 +20,7 @@ jobs:
           registry-url: "https://npm.pkg.github.com"
           always-auth: true
           # Defaults to the user or organization that owns the workflow file
-          # scope: "@octocat"
+          scope: "IDEMSInternational"
       - name: Cache node modules
         uses: actions/cache@v2
         with:
@@ -31,6 +31,7 @@ jobs:
             ${{ runner.os }}-yarn-v1-
       - run: yarn install
       - run: yarn build:components
+      # include registry manually as workaround for https://github.com/npm/cli/issues/2453
       - run: npm publish --registry=https://npm.pkg.github.com
         env:
           NPM_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
