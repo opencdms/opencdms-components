@@ -62,12 +62,17 @@ export class OpenCDMSApiService {
         console.log(`[Res] ${url}`, response);
         return response;
       } catch (error) {
+        console.error(error);
         const { url, data, status } = error as ApiError;
-        const endpoint = url.replace(environment.opencdmsServerEndpoint, '');
-        const text = data?.detail || data || 'An error occured, see console logs for details';
-        const title = `[${status}] ${endpoint}`;
-        this.notificationService.createNotification({ title, text, meta: error, type: 'error' });
-        return null as any;
+        try {
+          const endpoint = url.replace(environment.opencdmsServerEndpoint, '');
+          const text = data?.detail || data || 'An error occured, see console logs for details';
+          const title = `[${status}] ${endpoint}`;
+          this.notificationService.createNotification({ title, text, meta: error, type: 'error' });
+          return null as any;
+        } catch (e) {
+          throw error;
+        }
       }
     };
     // global configuration

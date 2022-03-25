@@ -22,7 +22,7 @@ type IElement = OpenCDMSAPIModel.components['schemas']['ObsElementResponse']['re
 export class ElementSelectComponent extends FormComponentBase implements OnInit {
   public static componentName = 'element-select';
   public dataIsLoading = true;
-  public selectedElements: { [element_id: number]: IElement } = {};
+  public selectedElements: { [element_id: number]: boolean } = {};
   public elements: IElement[] = [];
 
   constructor(cdr: ChangeDetectorRef, private api: OpenCDMSApiService) {
@@ -38,13 +38,20 @@ export class ElementSelectComponent extends FormComponentBase implements OnInit 
     this.dataIsLoading = false;
   }
 
-  public toggleElementSelected(element: IElement) {
-    if (this.selectedElements.hasOwnProperty(element.element_id)) {
-      delete this.selectedElements[element.element_id];
-    } else {
-      this.selectedElements[element.element_id] = element;
+  /** When initial values set ensure the selectedElements highlighted also matches */
+  public override handleInitialValueSet = (v: number[]) => {
+    for (const element_id of v) {
+      this.toggleElementSelected(element_id);
     }
-    const value = Object.values(this.selectedElements).map((el) => el.element_id);
+  };
+
+  public toggleElementSelected(element_id: IElement['element_id']) {
+    if (this.selectedElements[element_id]) {
+      delete this.selectedElements[element_id];
+    } else {
+      this.selectedElements[element_id] = true;
+    }
+    const value = Object.keys(this.selectedElements);
     this.value = value;
   }
 }

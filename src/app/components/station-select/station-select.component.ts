@@ -24,7 +24,7 @@ export class StationSelectComponent extends FormComponentBase implements OnInit 
   public dataIsLoading = true;
   public stations: IStation[] = [];
 
-  public selectedStations: { [station_id: string]: IStation } = {};
+  public selectedStations: { [station_id: string]: boolean } = {};
 
   constructor(cdr: ChangeDetectorRef, private api: OpenCDMSApiService) {
     super(cdr);
@@ -39,13 +39,20 @@ export class StationSelectComponent extends FormComponentBase implements OnInit 
     this.dataIsLoading = false;
   }
 
-  public toggleStationSelected(station: IStation) {
-    if (this.selectedStations.hasOwnProperty(station.station_id)) {
-      delete this.selectedStations[station.station_id];
-    } else {
-      this.selectedStations[station.station_id] = station;
+  /** When initial values set ensure the selectedElements highlighted also matches */
+  public override handleInitialValueSet = (v: number[]) => {
+    for (const station_id of v) {
+      this.toggleStationSelected(`${station_id}`);
     }
-    const value = Object.values(this.selectedStations).map((station) => station.station_id);
+  };
+
+  public toggleStationSelected(station_id: IStation['station_id']) {
+    if (this.selectedStations[station_id]) {
+      delete this.selectedStations[station_id];
+    } else {
+      this.selectedStations[station_id] = true;
+    }
+    const value = Object.keys(this.selectedStations).map((station_id) => Number(station_id));
     this.value = value;
   }
 }

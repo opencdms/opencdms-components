@@ -39,12 +39,6 @@ type IAliasFormValues = { [name in IPeriodName]: IPeriodValueAlias };
 })
 export class PeriodSelectComponent extends FormComponentBase {
   public static componentName = 'period-select';
-
-  @Input() set selectedStations(selectedStations: any) {
-    console.log('setting stations', selectedStations);
-    // TODO - assign alias values based on available stations
-  }
-
   public periodAliasValues = PERIOD_ALIAS_VALUES;
   public startOptions = this.generateStartOptions();
   public endOptions = this.generateEndOptions();
@@ -72,6 +66,12 @@ export class PeriodSelectComponent extends FormComponentBase {
     this.periodAliasValues[period].custom = customValue;
     this.updateValues();
   }
+
+  /** When initial values set ensure the selectedElements highlighted also matches */
+  public override handleInitialValueSet = (v: [string, string]) => {
+    this.setPeriodCustomValue('start', v[0]);
+    this.setPeriodCustomValue('end', v[1]);
+  };
 
   /** Reflect selected period alias values to main value control */
   private updateValues() {

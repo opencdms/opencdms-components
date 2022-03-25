@@ -11,7 +11,7 @@
     <tr
       *ngFor="let element of elements"
       [class.table-primary]="selectedElements[element.element_id]"
-      (click)="toggleElementSelected(element)"
+      (click)="toggleElementSelected(element.element_id)"
     >
       <th scope="row">{{ element.element_id }}</th>
       <td>{{ element.abbreviation }}</td>
