@@ -1,4 +1,13 @@
-<c-toast [autohide]="false" [fade]="true" [visible]="submission.status" class="response-container">
+<!-- Note - Toasts do not fully work in angular so a mix of angular and core classes and methods
+included to handle things like data-coreui-dismiss, visible, and show/hide class -->
+<c-toast
+  [autohide]="false"
+  [fade]="true"
+  [visible]="submission.status"
+  class="response-container"
+  [class.show]="submission.status ? true : null"
+  [class.hide]="submission.status ? null : true"
+>
   <c-toast-header [closeButton]="false">
     {{ submission.status }}
     <button
