@@ -23,15 +23,7 @@ export interface IDialogSubmission {
   };
 }
 
-const SUBMISSION_DEFAULT: IDialogSubmission = {
-  status: 'success',
-  request: {},
-  response: {
-    type: 'table',
-    tableData: testData(),
-    tableHeaders: Object.keys(testData()[0]),
-  },
-};
+const SUBMISSION_DEFAULT: IDialogSubmission = { status: undefined, request: {}, response: {} };
 
 @Injectable({
   providedIn: 'root',
