@@ -65,7 +65,7 @@ export class DialogDataService {
       }
       if (responseData && responseData.result) {
         this.submission.response.type = 'table';
-        this.submission.response.tableHeaders = Object.keys(responseData[0]);
+        this.submission.response.tableHeaders = Object.keys(responseData.result[0]);
         this.submission.response.tableData = responseData.result;
       }
 
