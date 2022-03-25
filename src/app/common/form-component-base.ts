@@ -16,14 +16,24 @@ export class FormComponentBase implements ControlValueAccessor {
     return this._value;
   }
   set value(v: any) {
-    if (this._value !== v) {
-      this._value = v;
-      this.onChange(v);
+    if (!this.touched) {
       this.markAsTouched();
-      this.cdr.markForCheck();
-      this.valueChanged.emit(v);
+      this.handleInitialValueSet(v);
+    } else {
+      if (this._value !== v) {
+        this._value = v;
+        this.onChange(v);
+        this.markAsTouched();
+        this.cdr.markForCheck();
+        this.valueChanged.emit(v);
+      }
     }
   }
+
+  /** Optional override for individual components to respond to value changes */
+  handleInitialValueSet = (v: any) => {
+    this.value = v;
+  };
 
   onChange = (v: any) => {};
 

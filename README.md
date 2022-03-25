@@ -84,6 +84,8 @@ The examples folder contains demonstrations of custom-elements being used within
 
 - API query methods currently have no process for batching queries. As a result most have queries have been specified with arbitrarily high limit parameters set instead
 
+- Initial value setting for dialogs is currently handled only by a single initialvalues input and child delegation is typically handled through custom handleInitialValueSet methods on each component. In the future it might be nicer to find a way to integrate more tightly with formbindings and expose multiple properties instead of just initialvalues
+
 ## Links and Resources
 
 https://fireship.io/lessons/angular-elements-quick-start-guide/

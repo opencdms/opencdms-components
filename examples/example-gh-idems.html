@@ -1,8 +1,11 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <!-- Import Stylesheets -->
-    <link rel="stylesheet" href="../components/styles.css" />
+    <!-- Import direct from github repo (via jsdelivr CDN) -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/gh/IDEMSInternational/opencdms-components@main/lib/styles.css"
+    />
     <title>OpenCDMS Webcomponents</title>
   </head>
   <body style="padding: 1em">
@@ -15,7 +18,7 @@
     <opencdms-inventory-plot
       initialvalue='{ "station_ids": [ 67774010, 67775050 ], "element_ids": [ 2, 4 ], "period": [ "2000-01-01", "2000-03-01" ] }'
     ></opencdms-inventory-plot>
-    <script defer src="../components/index.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/gh/IDEMSInternational/opencdms-components@main/lib/index.js"></script>
   </body>
 
   <style>
