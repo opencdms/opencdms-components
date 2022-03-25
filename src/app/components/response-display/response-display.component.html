@@ -17,8 +17,24 @@
       <div>{{ submission.request.params | json }}</div>
     </div>
     <div *ngSwitchCase="'success'">
+      <!-- Image -->
       <div class="image-container" *ngIf="submission.response.imageData">
         <img [src]="submission.response.imageData" />
+      </div>
+      <!-- Table -->
+      <div style="padding: 1em" *ngIf="submission.response.tableData as tableData">
+        <table cTable hover bordered>
+          <thead>
+            <tr cTableColor="primary">
+              <th *ngFor="let header of submission.response.tableHeaders">{{ header }}</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let row of tableData">
+              <td *ngFor="let header of submission.response.tableHeaders">{{ row[header] }}</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
     <div *ngSwitchCase="'error'">

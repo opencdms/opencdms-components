@@ -32,7 +32,7 @@ export class StationSelectComponent extends FormComponentBase implements OnInit 
 
   async ngOnInit() {
     const req = this.api.path('/v1/stations/').method('get').create();
-    const res = await req({}).catch((err) => this.api.handleError(err));
+    const res = await req({ limit: 999999 }).catch((err) => this.api.handleError(err));
     if (res) {
       this.stations = res.data.result;
     }
