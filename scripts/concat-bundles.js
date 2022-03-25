@@ -5,7 +5,7 @@ const concat = require("concat");
 /** Combine output angular JS into single index.js file for easier consumption */
 (async function concatBundles() {
   const buildDir = path.resolve(__dirname, "../dist", "webcomponents");
-  const outDir = path.resolve(__dirname, "../components");
+  const outDir = path.resolve(__dirname, "../lib");
 
   fs.ensureDirSync(outDir);
   fs.emptyDirSync(outDir);

@@ -2,6 +2,10 @@
   "name": "opencdms-components",
   "version": "0.2.0",
   "license": "SEE LICENSE in LICENSE",
+  "main": "./lib/index.js",
+  "files": [
+    "/lib"
+  ],
   "scripts": {
     "ng": "ng",
     "start": "ng serve --open",
@@ -13,7 +17,7 @@
     "generate:types:opencdms": "npx openapi-typescript https://api.opencdms.org/climsoft/openapi.json --output src/models/opencdms-api.ts",
     "generate:types:components": "npx openapi-typescript https://opencdms-components-api-jnxkyuyk3q-ew.a.run.app/openapi.json --output src/models/components-api.ts"
   },
-  "private": true,
+  "private": false,
   "dependencies": {
     "@angular/animations": "^13.2.6",
     "@angular/cdk": "^13.2.4",
