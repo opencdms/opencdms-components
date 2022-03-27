@@ -39,11 +39,11 @@ export class ElementSelectComponent extends FormComponentBase implements OnInit 
   }
 
   /** When initial values set ensure the selectedElements highlighted also matches */
-  public override handleInitialValueSet = (v: number[]) => {
+  public override handleInitialValueSet(v: number[]) {
     for (const element_id of v) {
       this.toggleElementSelected(element_id);
     }
-  };
+  }
 
   public toggleElementSelected(element_id: IElement['element_id']) {
     if (this.selectedElements[element_id]) {

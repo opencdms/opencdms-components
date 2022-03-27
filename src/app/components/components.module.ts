@@ -19,12 +19,14 @@ import { SummaryTypeSelectComponent } from './summary-type-select/summary-type-s
 import { PeriodSelectComponent } from './period-select/period-select.component';
 import { MissingValuesSelectComponent } from './missing-values-select/missing-values-select.component';
 import { ResponseDisplayComponent } from './response-display/response-display.component';
+import { SummaryStatisticSelectComponent } from './summary-statistic-select/summary-statistic-select.component';
 
 /** Components to export as standalone webcomponents */
 export const CUSTOM_COMPONENTS = [
   StationSelectComponent,
   ElementSelectComponent,
   SummaryTypeSelectComponent,
+  SummaryStatisticSelectComponent,
   PeriodSelectComponent,
   MissingValuesSelectComponent,
 ];

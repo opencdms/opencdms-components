@@ -68,10 +68,10 @@ export class PeriodSelectComponent extends FormComponentBase {
   }
 
   /** When initial values set ensure the selectedElements highlighted also matches */
-  public override handleInitialValueSet = (v: [string, string]) => {
+  public override handleInitialValueSet(v: [string, string]) {
     this.setPeriodCustomValue('start', v[0]);
     this.setPeriodCustomValue('end', v[1]);
-  };
+  }
 
   /** Reflect selected period alias values to main value control */
   private updateValues() {
