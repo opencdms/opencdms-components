@@ -42,3 +42,7 @@ img {
   display: flex;
   align-items: center;
 }
+.error-message {
+  color: var(--cui-danger, #e55353);
+  padding: 1em;
+}
