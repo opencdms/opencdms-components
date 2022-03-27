@@ -9,6 +9,7 @@ interface IDialogValues {
   station_ids: string[];
   element_ids: number[];
   period: [string, string];
+  summary_statistic: string;
   summary_type: string;
 }
 /** Data submission type combines expected body and query params */
@@ -29,7 +30,8 @@ export class ClimaticSummaryComponent extends DialogBaseComponent {
         station_ids: [[], Validators.required],
         element_ids: [[], Validators.required],
         period: [['', ''], NoEmptyValuesValidator()],
-        summary_type: ['monthly', Validators.required],
+        summary_statistic: ['monthly', Validators.required],
+        summary_type: ['mean', Validators.required],
       },
       fb,
       dialogDataService
@@ -54,7 +56,7 @@ export class ClimaticSummaryComponent extends DialogBaseComponent {
         elements: values.element_ids,
       },
       product_params: {
-        to: values.summary_type,
+        to: values.summary_statistic,
       },
     };
   }

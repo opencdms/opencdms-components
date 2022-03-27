@@ -31,9 +31,9 @@ export class FormComponentBase implements ControlValueAccessor {
   }
 
   /** Optional override for individual components to respond to value changes */
-  handleInitialValueSet = (v: any) => {
+  handleInitialValueSet(v: any) {
     this.value = v;
-  };
+  }
 
   onChange = (v: any) => {};
 

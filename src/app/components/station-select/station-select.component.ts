@@ -40,11 +40,11 @@ export class StationSelectComponent extends FormComponentBase implements OnInit 
   }
 
   /** When initial values set ensure the selectedElements highlighted also matches */
-  public override handleInitialValueSet = (v: number[]) => {
+  public override handleInitialValueSet(v: number[]) {
     for (const station_id of v) {
       this.toggleStationSelected(`${station_id}`);
     }
-  };
+  }
 
   public toggleStationSelected(station_id: IStation['station_id']) {
     if (this.selectedStations[station_id]) {

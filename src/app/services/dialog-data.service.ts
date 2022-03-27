@@ -19,6 +19,7 @@ export interface IDialogSubmission {
     imageData?: SafeUrl;
     tableData?: any[];
     tableHeaders?: string[];
+    errorMessage?: string;
     type?: IDialogResponseType;
   };
 }
@@ -42,9 +43,9 @@ export class DialogDataService {
     this.submission.status = 'pending';
     this.submission.request._raw = req;
     const res = await req(params).catch((err) => {
-      console.error(err);
       this.submission.response._raw = err;
       this.submission.status = 'error';
+      this.submission.response.errorMessage = err.data?.message;
       return;
     });
     this.submission.response._raw = res;

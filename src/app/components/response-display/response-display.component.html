@@ -47,7 +47,7 @@ included to handle things like data-coreui-dismiss, visible, and show/hide class
       </div>
     </div>
     <div *ngSwitchCase="'error'">
-      <p>An error occurred, see console for more details</p>
+      <p>{{ submission.response.errorMessage || "An error occurred, see console for more details" }}</p>
     </div>
     <!--default case when there are no matches -->
     <div *ngSwitchDefault>Request status: {{ submission.status }}</div>

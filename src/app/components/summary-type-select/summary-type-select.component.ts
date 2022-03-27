@@ -17,26 +17,16 @@ import { FormComponentBase } from 'src/app/common/form-component-base';
 })
 export class SummaryTypeSelectComponent extends FormComponentBase {
   public static componentName = 'summary-type-select';
-
   public options = [
-    { label: 'hourly', value: 'hourly' },
-    { label: 'daily', value: 'daily' },
-    { label: 'pentad', value: 'pentad' },
-    { label: 'dekadal', value: 'dekadal' },
-    { label: 'monthly', value: 'monthly' },
-    { label: 'annual-within-year', value: 'annual-within-year' },
-    { label: 'annual', value: 'annual' },
-    { label: 'longterm-monthly', value: 'longterm-monthly' },
-    { label: 'longterm-within-year', value: 'longterm-within-year' },
-    { label: 'station', value: 'station' },
-    { label: 'overall', value: 'overall' },
+    { label: 'Mean', value: 'mean' },
+    { label: 'Total', value: 'total' },
   ];
 
   constructor(cdr: ChangeDetectorRef) {
     super(cdr);
   }
 
-  public setSummaryType(value: string) {
+  public setValue(value: string) {
     this.value = value;
   }
 }
