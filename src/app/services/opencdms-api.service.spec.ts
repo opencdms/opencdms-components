@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { TestService } from './test.service';
+import { OpenCDMSApiService } from './opencdms-api.service';
 
-describe('TestService', () => {
-  let service: TestService;
+describe('OpenCDMSApiService', () => {
+  let service: OpenCDMSApiService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(TestService);
+    service = TestBed.inject(OpenCDMSApiService);
   });
 
   it('should be created', () => {

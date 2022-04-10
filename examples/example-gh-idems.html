@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- Import direct from github repo (via jsdelivr CDN) -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/gh/IDEMSInternational/opencdms-components@main/lib/styles.css"
+    />
+    <title>OpenCDMS Webcomponents</title>
+  </head>
+  <body style="padding: 1em">
+    <h1>Open CDMS Inventory Plot Example</h1>
+    <p>
+      This example uses the <code>opencdms-inventory-plot</code> webcomponent to generate an inventory plot with
+      specific initial values
+    </p>
+
+    <opencdms-inventory-plot
+      initialvalue='{ "station_ids": [ 67774010, 67775050 ], "element_ids": [ 2, 4 ], "period": [ "2000-01-01", "2000-03-01" ] }'
+    ></opencdms-inventory-plot>
+    <script defer src="https://cdn.jsdelivr.net/gh/IDEMSInternational/opencdms-components@main/lib/index.js"></script>
+  </body>
+
+  <style>
+    opencdms-inventory-plot {
+      border: 1px solid #9e9e9e;
+      padding: 0.5em;
+      display: block;
+      overflow: auto;
+      width: calc(100% - 32px);
+      height: calc(100vh - 130px);
+      max-height: calc(100vh - 130px);
+    }
+  </style>
+</html>

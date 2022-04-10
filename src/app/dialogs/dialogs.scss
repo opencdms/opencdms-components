@@ -1,0 +1,21 @@
+.btn:disabled {
+  background-color: var(--cui-btn-disabled-bg);
+  border-color: var(--cui-btn-disabled-border-color, transparent);
+}
+// Use secondary styles for disabled
+.btn-info {
+  --cui-btn-disabled-bg: #9da5b1;
+  --cui-btn-disabled-border-color: #9da5b1;
+  --cui-btn-disabled-color: #000015;
+}
+.dialog-submit-button {
+  min-width: 100px;
+  position: absolute;
+  top: 1em;
+  right: 1em;
+}
+.dialog-debug-values {
+  margin-top: 1em;
+  font-size: small;
+  padding: 0.5em;
+}

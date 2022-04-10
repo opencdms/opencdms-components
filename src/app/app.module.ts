@@ -1,35 +1,21 @@
-import { DoBootstrap, Injector, NgModule } from '@angular/core';
-import { createCustomElement } from '@angular/elements';
+import { Injector, NgModule } from '@angular/core';
+import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
-
-import { TestComponent } from './components/test/test.component';
-
-/** All custom elements should be included here */
-const CUSTOM_ELEMENTS = [TestComponent];
-const CUSTOM_ELEMENTS_PREFIX = 'opencdms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FormModule } from '@coreui/angular';
+import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
+import { WebcomponentWrapper } from './components/webcomponentWrapper';
+import { registerWebComponents } from './register-webcomponents';
 
 @NgModule({
-  declarations: [...CUSTOM_ELEMENTS],
-  imports: [BrowserModule],
+  declarations: [AppComponent, WebcomponentWrapper],
+  imports: [BrowserModule, AppRoutingModule, BrowserAnimationsModule, FormModule, ReactiveFormsModule],
   providers: [],
-  bootstrap: [], // skip typical app-root bootratp
+  bootstrap: [AppComponent],
 })
-export class AppModule implements DoBootstrap {
-  constructor(private injector: Injector) {
-    for (const component of CUSTOM_ELEMENTS) {
-      const name = component.componentName;
-      if (name) {
-        const el = createCustomElement(component, { injector: this.injector });
-        customElements.define(`${CUSTOM_ELEMENTS_PREFIX}-${name}`, el);
-      } else {
-        console.warn(
-          'Could not register component as static componentName not defined',
-          component.name
-        );
-      }
-    }
+export class AppModule {
+  constructor(injector: Injector) {
+    registerWebComponents(injector);
   }
-
-  // Make explicit call to bootstrap as no components provided to bootstrap array
-  ngDoBootstrap() {}
 }
